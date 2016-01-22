@@ -1,0 +1,8 @@
+include /../node_modules/bem-jade/bem
+
+mixin button()
+ +e('button')(type='button' waves)&attributes(attributes)
+  block
+
+mixin icon(id)
+  svg: use(xlink:href='#' + id)

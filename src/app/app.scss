@@ -1,0 +1,191 @@
+$mainBgColor: #181623;
+$barSize: 65px;
+$defaultSidePadding: 15px;
+$mainActiveColor: #ff3366;
+$topBarColor: #1d1a2a;
+$defaultBtnSize: 40px;
+$mainAccentColor: #94a7f8;
+$mainDarkColor: #0f0e17;
+
+@import "../styles/mixins";
+@import "../styles/fonts";
+@import "../styles/normalize";
+@import "../styles/buttons";
+@import "../styles/waves";
+
+svg {
+  fill: currentColor
+}
+
+a {
+  &:hover {
+    color: $mainActiveColor;
+  }
+}
+
+body {
+  @extend %font-open-sans;
+  background-color: $mainBgColor;
+  color: #fff;
+}
+
+.header {
+  padding: 0 $defaultSidePadding 0;
+  box-sizing: border-box;
+  color: #fff;
+  height: $barSize;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__btns {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__btn {
+    @include makeCircle($defaultBtnSize);
+    @include alignCenter();
+
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.status-area {
+  $itemSize: 15px;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  //background-color: $mainDarkColor;
+  //padding: 10px 10px;
+  //border-radius: 20px;
+
+  &__item {
+    color: rgba(255,255,255,0.3);
+    height: $itemSize;
+    margin-right: 10px;
+    font-size: 11px;
+    line-height: 8px;
+    display: flex;
+    align-items: flex-start;
+
+    svg {
+      @include size($itemSize);
+    }
+
+    &--active {
+      color: rgba($mainActiveColor, 0.5);
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+  }
+}
+
+%top-bar {
+  background-color: #1d1a2a;
+  padding: 0 $defaultSidePadding;
+  align-items: center;
+  display: flex;
+}
+
+.control-bar {
+  @extend %top-bar;
+  height: $barSize;
+  justify-content: space-between;
+
+  &__content {
+    font-size: 17.5px;
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.settings-bar {
+  margin-top: 1px;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  &__main-row, &__secondary-row {
+    @extend %top-bar;
+    background-color: rgba($topBarColor, 0.9);
+    justify-content: space-around;
+  }
+
+  &__main-row {
+    height: 80px;
+  }
+
+  &__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      @extend %waves-circle;
+      @extend %waves-light;
+      @include makeCircle($defaultBtnSize);
+      @include alignCenter();
+    }
+  }
+
+  &__feature-title {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  &__secondary-row {
+    border-top: 1px solid #292635;
+    height: 55px;
+
+    button {
+      @extend %waves-circle;
+      @extend %waves-light;
+
+      @include makeCircle($defaultBtnSize);
+      @include alignCenter();
+    }
+  }
+
+}
+
+.floor-plan {
+  $normalColor: #2b2c43;
+  $selectedColor: #80ee6e;
+  padding: 30px 15px;
+  position: relative;
+
+  .walls {
+    fill: #2b2c43;
+  }
+
+  .zone {
+
+
+    .trigger {
+      opacity: 0;
+    }
+
+    &.selected {
+      .walls {
+        fill: $selectedColor;
+      }
+    }
+  }
+}
+
+//components
+@import "../styles/components/temp-control";
+@import "../styles/components/zone-control";

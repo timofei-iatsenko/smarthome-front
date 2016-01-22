@@ -1,0 +1,9 @@
+include /tpl-components/common-components
+
++b.temp-control
+  +button.decrease((click)="decrease()")
+    +icon('minus')
+  +e.value
+    | {{ value }}&deg;
+  +button.increase((click)="increase()")
+    +icon('plus')

@@ -1,0 +1,48 @@
+.temp-control {
+  $height: 50px;
+  $btnGap: 3px;
+  $btnSize: $height - $btnGap * 2;
+  $width: 130px;
+
+  $bgColor: $mainDarkColor;
+
+  width: $width;
+  height: $height;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: $height;
+  background-color: $bgColor;
+
+  &__value {
+    position: absolute;
+    left: $height + $btnGap;
+    line-height: $height;
+  }
+
+  &__increase, &__decrease {
+    @include makeCircle($btnSize);
+    @extend %waves-circle;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: $btnGap;
+
+    svg {
+      height: 10.5px;
+    }
+  }
+
+  &__increase {
+    @extend %waves-light;
+    color: $mainAccentColor;
+    right: $btnGap;
+  }
+
+  &__decrease {
+    @extend %waves-light;
+    color: #fff;
+    left: $btnGap;
+  }
+}

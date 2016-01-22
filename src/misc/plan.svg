@@ -1,0 +1,25 @@
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="215 -472.4 695.5 899.9" xml:space="preserve">
+
+<polygon class="walls" points="502,-57.9 502,-29.9 512.1,-29.9 599.3,-29.9 621.6,-29.9 628.3,-29.9 635,-29.9 635,-43.9 635,-57.9 568.1,-57.9
+	"/>
+<g class="zone" zone-id="1">
+	<path class="walls"   d="M564-57.9h-62v-1h-2v-29h-3.5H491v15v15H372H253v-193v-193h119h119v158.5v158.5h5.5h3.5v-345H225v207v207h-5h-5
+		v14v14h198.5H564V-57.9z M319-463.4v-5.5h51.5H422v5.5v5.5h-51.5H319V-463.4z M319-449.4v-2.5h51.5H422v2.5v2.5h-51.5H319V-449.4z"
+		/>
+	<rect x="225" y="-471.9" class="trigger" width="277" height="442"/>
+</g>
+<g class="zone" zone-id="2">
+	<path class="walls" d="M566-471.9h-66v28h35h36v143.5v143.5h26h26v-5.5v-5.5h-20h-20v-138v-138h149.5H882v122.5v122.5h-80h-80v15.5
+		v15.5h-28h-28v5.5v5.5h28h28v13.5v13.5h5.5h5.5v-29.5v-29.5h74.5H882v65.5v65.5h-87.5h-87.6l0.3,14.2l0.3,13.8H910v-442H566z
+		 M803-449.4v2.5h-52h-52v-2.5v-2.5h52h52V-449.4z M803-463.4v5.5h-52h-52v-5.5v-5.5h52h52V-463.4z"/>
+	<rect x="571" y="-471.9" class="trigger" width="339" height="315"/>
+</g>
+<g class="zone" zone-id="3">
+	<path class="walls"  d="M881.6-29.9V2.3V38h-65h-65.1v-9v-9h-6h-6v9v9h-21.4h-21.4v6v6h92.7h92.7v154.5V359H758.5H634.9V204.5V50h10.5
+		h10.5v-5.5V39h-10.5h-10.5V2v-31.9H610V196v231h12.5H635v-20v-20h123.6h123.6v20v20h14h14V-25v-4.9H881.6z M727.6,381.5v2.5h-24.4
+		h-24.4v-2.5V379h24.4h24.4V381.5z M727.6,367v5h-24.4h-24.4v-5v-5h24.4h24.4V367z M857.2,381.5v2.5h-25.9h-25.9v-2.5V379h25.9h25.9
+		V381.5z M857.2,367v5h-25.9h-25.9v-5v-5h25.9h25.9V367z"/>
+	<rect x="610" y="38.1" class="trigger" width="300" height="388.9"/>
+</g>
+</svg>

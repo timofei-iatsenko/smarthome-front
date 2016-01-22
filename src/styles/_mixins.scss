@@ -1,0 +1,16 @@
+@mixin makeCircle($r) {
+  height: $r;
+  width: $r;
+  border-radius: $r;
+}
+
+@mixin size($size){
+  height: $size;
+  width: $size;
+}
+
+@mixin alignCenter(){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
