@@ -5,7 +5,6 @@ import {Component} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
-import {RouterActive} from './directives/router-active';
 import {Home} from './home/home';
 
 require('./app.scss');
@@ -17,7 +16,7 @@ require('./app.scss');
 @Component({
   selector: 'app',
   providers: [ ...FORM_PROVIDERS ],
-  directives: [ ...ROUTER_DIRECTIVES, RouterActive],
+  directives: [ ...ROUTER_DIRECTIVES],
   pipes: [],
   template: `
     <main>
@@ -31,8 +30,6 @@ require('./app.scss');
   { path: '/**', redirectTo: ['Index'] }
 ])
 export class App {
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
   constructor() {
 
   }

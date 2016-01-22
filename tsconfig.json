@@ -10,12 +10,6 @@
   },
   "files": [
     "typings/main.d.ts",
-    "test/injector.spec.ts",
-    "test/sanity-test.spec.ts",
-    "src/app/app.spec.ts",
-    "src/app/home/home.spec.ts",
-    "src/app/home/directives/x-large.spec.ts",
-    "src/app/home/providers/title.spec.ts",
     "src/main.ts",
     "src/vendor.ts"
   ],

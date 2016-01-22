@@ -1,8 +1,6 @@
 import {Component, Input, ElementRef} from 'angular2/core';
-import {NgStyle} from 'angular2/common';
 import {WavesDirective} from '../../common/directives/waves';
 import {ZoneModel} from '../../zones/zone.model.ts';
-//import jQuery = require('jquery');
 
 var jQuery: JQueryStatic = require('jquery');
 

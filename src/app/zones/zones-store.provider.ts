@@ -14,7 +14,6 @@ export class ZonesStoreProvider {
   }
 
   getById(id: number) {
-    console.log({id});
     return _.find(this._items, (item) => {
       return item.id == id;
     });
