@@ -18,6 +18,10 @@ export class TempControlComponent {
     service.nativeElement = element.nativeElement;
   }
 
+  get isZoneSelected(){
+    return !this.service.isCommonMode();
+  }
+
   get value() {
     return this.service.currentTarget.tempSetpoint;
   }

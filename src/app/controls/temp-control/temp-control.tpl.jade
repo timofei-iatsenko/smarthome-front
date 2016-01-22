@@ -1,6 +1,6 @@
 include /tpl-components/common-components
 
-+b.temp-control
++b.temp-control([ngClass]='{"temp-control--zoned": isZoneSelected}')
   +button.decrease((click)="decrease()")
     +icon('minus')
   +e.value

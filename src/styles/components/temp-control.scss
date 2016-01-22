@@ -13,6 +13,10 @@
   border-radius: $height;
   background-color: $bgColor;
 
+  &--zoned {
+    background-color: rgba(128, 238, 110, 0.08);
+  }
+
   &__value {
     position: absolute;
     left: $height + $btnGap;
