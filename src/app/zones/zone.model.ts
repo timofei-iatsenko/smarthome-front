@@ -5,6 +5,7 @@ export class ZoneModel implements ITempControllable {
   public ambientTemp: number;
   public tempSetpoint: number;
   public enabled: boolean;
+  public selected: boolean;
   public sync: boolean;
   public controlPosition: ControlPosition;
   public id: number;

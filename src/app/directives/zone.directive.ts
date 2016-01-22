@@ -14,11 +14,18 @@ const directives: ZoneDirective[] = [];
   }
 })
 export class ZoneDirective {
-  selected: boolean;
   @Input('zone-id') zoneId: number;
 
   constructor(private zones: ZonesStoreProvider, private element: ElementRef, private tempControl: TempControlProvider) {
     directives.push(this);
+  }
+
+  get selected(): boolean {
+    return this.zoneModel.selected;
+  }
+
+  set selected(value: boolean){
+    this.zoneModel.selected = value;
   }
 
   get zoneModel() {

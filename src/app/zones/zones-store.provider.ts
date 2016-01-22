@@ -13,7 +13,13 @@ export class ZonesStoreProvider {
     return this._items;
   }
 
-  getById(id: number) {
+  get selected(): ZoneModel {
+    return _.find(this._items, (item) => {
+      return item.selected;
+    });
+  }
+
+  getById(id: number): ZoneModel  {
     return _.find(this._items, (item) => {
       return item.id == id;
     });

@@ -1,0 +1,50 @@
+.settings-panel {
+  margin-top: 1px;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  &__features-row, &__options-row {
+    @extend %top-bar;
+    background-color: rgba($topBarColor, 0.9);
+    justify-content: space-around;
+  }
+
+  &__features-row {
+    height: 80px;
+  }
+
+  &__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75px;
+
+    button {
+      @extend %waves-circle;
+      @extend %waves-light;
+      @include makeCircle($defaultBtnSize);
+      @include alignCenter();
+    }
+  }
+
+  &__feature-title {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  &__options-row {
+    border-top: 1px solid #292635;
+    height: 55px;
+
+    button {
+      @extend %waves-circle;
+      @extend %waves-light;
+
+      @include makeCircle($defaultBtnSize);
+      @include alignCenter();
+    }
+  }
+
+}

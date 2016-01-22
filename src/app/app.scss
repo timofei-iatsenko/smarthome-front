@@ -64,9 +64,6 @@ body {
 
   justify-content: space-between;
   align-items: center;
-  //background-color: $mainDarkColor;
-  //padding: 10px 10px;
-  //border-radius: 20px;
 
   &__item {
     color: rgba(255,255,255,0.3);
@@ -111,56 +108,6 @@ body {
   }
 }
 
-.settings-bar {
-  margin-top: 1px;
-  position: absolute;
-  width: 100%;
-  z-index: 10;
-
-  &__main-row, &__secondary-row {
-    @extend %top-bar;
-    background-color: rgba($topBarColor, 0.9);
-    justify-content: space-around;
-  }
-
-  &__main-row {
-    height: 80px;
-  }
-
-  &__feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    button {
-      @extend %waves-circle;
-      @extend %waves-light;
-      @include makeCircle($defaultBtnSize);
-      @include alignCenter();
-    }
-  }
-
-  &__feature-title {
-    display: block;
-    margin-top: 5px;
-    font-size: 12px;
-  }
-
-  &__secondary-row {
-    border-top: 1px solid #292635;
-    height: 55px;
-
-    button {
-      @extend %waves-circle;
-      @extend %waves-light;
-
-      @include makeCircle($defaultBtnSize);
-      @include alignCenter();
-    }
-  }
-
-}
-
 .floor-plan {
   $normalColor: #2b2c43;
   $selectedColor: #80ee6e;
@@ -189,3 +136,4 @@ body {
 //components
 @import "../styles/components/temp-control";
 @import "../styles/components/zone-control";
+@import "../styles/components/settings-panel";

@@ -12,7 +12,7 @@ import {ZoneModel} from '../zones/zone.model.ts';
 import {ZonesStoreProvider} from '../zones/zones-store.provider.ts';
 import {ZoneDirective} from '../directives/zone.directive.ts';
 import {ZONES} from '../config';
-import _  = require('lodash');
+import {SettingsPanelComponent} from '../settings/settings-panel/settings-panel.component.ts';
 
 @Component({
   selector: 'home',
@@ -21,30 +21,33 @@ import _  = require('lodash');
     TempControlProvider
   ],
   directives: [
-    ...FORM_DIRECTIVES,
     WavesDirective,
     ZoneControlComponent,
     TempControlComponent,
-    ZoneDirective
+    ZoneDirective,
+    SettingsPanelComponent
   ],
   pipes: [ ],
   template: require('./home.jade')
 })
 export class Home {
-  // TypeScript public modifiers
-  expanded = false;
-  settingsExpanded = false;
+  settingsExpanded = true;
   zones: ZoneModel[];
 
   constructor(private zonesStore: ZonesStoreProvider) {
 
   }
 
+  get zoneTitle() {
+    if (this.zonesStore.selected) {
+      return this.zonesStore.selected.title;
+    }
+
+    return null;
+  }
+
   toggleSettings() {
     this.settingsExpanded = !this.settingsExpanded;
-  }
-  toggle() {
-    this.expanded = !this.expanded;
   }
 
   ngOnInit() {
@@ -54,5 +57,4 @@ export class Home {
 
     this.zones = this.zonesStore.items;
   }
-
 }

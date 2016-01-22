@@ -16,7 +16,5 @@ include /tpl-components/common-components
       +icon('power2')
     +button.btn--toggle([ngClass]="{'zone-control__btn--active': expanded}", (click)='toggle()')
       +icon('more')
-    //+button.btn--right
-    //  include /icons/moon.svg
     +button.btn--right([ngClass]="{'zone-control__btn--active': zone.sync}", (click)='toggleSync()')
       +icon('sync')

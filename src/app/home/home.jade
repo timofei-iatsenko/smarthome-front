@@ -2,7 +2,7 @@ include /tpl-components/common-components
 
 +b.header
   +e.btns
-    +button.btn.waves-circle.waves-light((click)='toggleSettings()')
+    +button.btn.waves-circle.waves-light((click)='toggleSettings()', [ngClass]="{active: settingsExpanded}")
       +icon('cogwheel')
     +button.btn.waves-circle.waves-light
       +icon('clock-history')
@@ -21,38 +21,9 @@ include /tpl-components/common-components
   +e.control
     temp-control
   +e.content
-    | Общая
+    | {{ zoneTitle ? zoneTitle : 'Во всех комнатах' }}
 
-+b.settings-bar([hidden]="!settingsExpanded")
-  +e.main-row
-
-    +e.feature
-      +button
-        +icon('fan')
-      +e('span').feature-title Средняя
-
-    +e.feature
-      +button
-        +icon('snowflake')
-      +e('span').feature-title Cool
-
-    +e.feature
-      +button
-        +icon('hood')
-      +e('span').feature-title Вытяжка
-
-    +e.feature
-      +button
-        +icon('input-air')
-      +e('span').feature-title Приток
-
-  +e.secondary-row
-    +button
-      +icon('snowflake')
-    +button
-      +icon('sun')
-    +button
-      +icon('water-drop')
+settings-panel([hidden]="!settingsExpanded")
 
 +b.floor-plan
   include /misc/plan.svg

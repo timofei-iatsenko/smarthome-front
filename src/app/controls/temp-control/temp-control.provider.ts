@@ -6,7 +6,6 @@ class CommonTemperature implements ITempControllable {
 
   constructor(protected _setpoint: number) {}
 
-
   incrementTemp() {
     this._setpoint++;
   }
