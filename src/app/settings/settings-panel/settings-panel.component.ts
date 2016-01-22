@@ -37,7 +37,8 @@ const settingsFeatures = [
       {
         icon: 'fan',
         key: 'middle',
-        name: 'Сред.'
+        name: 'Сред.',
+        selected: true,
       },
       {
         icon: 'fan',
@@ -58,7 +59,8 @@ const settingsFeatures = [
       {
         icon: 'snowflake',
         key: 'cool',
-        name: 'Охлаждение'
+        name: 'Охлаждение',
+        selected: true,
       },
       {
         icon: 'sun',
@@ -110,11 +112,7 @@ export class SettingsPanelComponent {
   }
 
   protected getSelectedOption(options: IFeatureOption[]) {
-    let option = _.find(options, (o) => o.selected);
-    if (!option) {
-      option = options[0];
-    }
-    return option;
+    return _.find(options, (o) => o.selected);
   }
 
   isFeatureActive(feature: ISettingsFeature) {
@@ -141,12 +139,12 @@ export class SettingsPanelComponent {
     return feature.icon;
   }
 
-  featureToggle(feature: ISettingsFeature) {
-    this.options = null;
-
+  toggleFeature(feature: ISettingsFeature) {
     if (feature.type === IFeatureType.options) {
-      this.options = feature.options;
+      // if options already set, collapse bar (clear options)
+      this.options = this.options === feature.options ? null : feature.options;
     } else {
+      this.options = null;
       feature.enabled =  !feature.enabled;
     }
   }

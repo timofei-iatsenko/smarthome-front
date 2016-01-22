@@ -2,11 +2,11 @@ include /tpl-components/common-components
 
 +b.settings-panel
   +e.features-row
-    +e.feature(*ngFor="#feature of features", (click)='featureToggle(feature)')
+    +e.feature(*ngFor="#feature of features", (click)='toggleFeature(feature)')
       +button()([ngClass] = '{active: isFeatureActive(feature)}')
         +icon('{{getFeatureIcon(feature)}}')
       +e('span').feature-title {{ getFeatureTitle(feature) }}
   +e.options-row(*ngIf="options?.length")
     +e.option(*ngFor="#option of options", (click) = 'selectOption(option)')
-      +button
+      +button()([ngClass] = '{active: option.selected}')
         +icon('{{option.icon}}')

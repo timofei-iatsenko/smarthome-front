@@ -31,7 +31,7 @@ import {SettingsPanelComponent} from '../settings/settings-panel/settings-panel.
   template: require('./home.jade')
 })
 export class Home {
-  settingsExpanded = true;
+  settingsExpanded = false;
   zones: ZoneModel[];
 
   constructor(private zonesStore: ZonesStoreProvider) {
