@@ -18,7 +18,7 @@ export class TempControlComponent {
     service.nativeElement = element.nativeElement;
   }
 
-  get isZoneSelected(){
+  get isZoned(){
     return !this.service.isCommonMode();
   }
 

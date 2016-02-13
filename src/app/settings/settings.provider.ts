@@ -1,23 +1,31 @@
 import {Injectable} from 'angular2/core';
-import {SettingsModel} from './settings.model.ts';
-
-enum FanSpeed {
-  Max, Middle, Min
-}
-
-enum AcMode {
-  Cool, Heat, Dry, Auto
-}
+import {SETTINGS_FEATURES} from '../config';
+import {Settings} from '../interfaces';
+import {SettingsToggleFeatureModel, SettingsOptionsFeatureModel, SettingsBaseFeatureModel} from './settings-feature.model';
+import {SimpleEvent} from '../libs/simple-event';
 
 @Injectable()
 export class SettingsProvider {
 
-  // public acFanSpeed: FanSpeed = FanSpeed.Middle;
-  public acMode: AcMode = AcMode.Cool;
-  public hoodEnabled: boolean;
-  public airInputEnabled: boolean;
+  onChange = new SimpleEvent();
+  protected _features: SettingsBaseFeatureModel[];
 
   constructor() {
-
+    this._features  = this.featuresFactory(SETTINGS_FEATURES);
   }
+
+  featuresFactory(configs: Settings.IFeatureConfig[]): SettingsBaseFeatureModel[] {
+    return _.map(configs, (c) => {
+      if (c.type ===  Settings.IFeatureType.toggle) {
+        return new SettingsToggleFeatureModel(c);
+      }
+      return new SettingsOptionsFeatureModel(c);
+    });
+  }
+
+  get features(): SettingsBaseFeatureModel[] {
+    return this._features;
+  }
+
+
 }

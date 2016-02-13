@@ -2,97 +2,12 @@ import {Component, Input, ElementRef} from 'angular2/core';
 import {WavesDirective} from '../../common/directives/waves';
 import {SettingsProvider} from '../settings.provider.ts';
 import {XLinkDirective} from '../../directives/xlink.directive';
-
-
-enum IFeatureType {
-  toggle, options
-}
-
-interface IFeatureOption {
-  icon: string;
-  key: string;
-  name: string;
-  selected?: boolean;
-}
-
-interface ISettingsFeature {
-  key: string;
-  type: IFeatureType;
-  options: IFeatureOption[];
-  icon?: string;
-  name?: string;
-  enabled?: boolean;
-}
-
-const settingsFeatures = [
-  {
-    key: 'acFanSpeed',
-    type: IFeatureType.options,
-    options: [
-      {
-        icon: 'fan',
-        key: 'min',
-        name: 'Мин.'
-      },
-      {
-        icon: 'fan',
-        key: 'middle',
-        name: 'Сред.',
-        selected: true,
-      },
-      {
-        icon: 'fan',
-        key: 'max',
-        name: 'Макс.'
-      },
-      {
-        icon: 'fan',
-        key: 'max',
-        name: 'Авто'
-      },
-    ],
-  },
-  {
-    key: 'acMode',
-    type: IFeatureType.options,
-    options: [
-      {
-        icon: 'snowflake',
-        key: 'cool',
-        name: 'Охлаждение',
-        selected: true,
-      },
-      {
-        icon: 'sun',
-        key: 'heat',
-        name: 'Обогрев'
-      },
-      {
-        icon: 'water-drop',
-        key: 'dry',
-        name: 'Осушение'
-      },
-    ],
-  },
-  {
-    icon: 'hood',
-    key: 'hood',
-    name: 'Выятяжка',
-    type: IFeatureType.toggle,
-  },
-  {
-    icon: 'input-air',
-    key: 'inputAir',
-    name: 'Приток',
-    type: IFeatureType.toggle,
-  },
-];
+import {Settings} from '../../interfaces';
+import {SettingsBaseFeatureModel, SettingsOptionsFeatureModel} from '../settings-feature.model';
+import {SettingsToggleFeatureModel} from "../settings-feature.model";
 
 @Component({
   selector: 'settings-panel',
-  providers: [
-    SettingsProvider
-  ],
   directives: [
     WavesDirective,
     XLinkDirective
@@ -101,59 +16,34 @@ const settingsFeatures = [
 })
 export class SettingsPanelComponent {
 
-  options: IFeatureOption[];
+  selectedFeature: SettingsOptionsFeatureModel;
 
-  constructor(private settings: SettingsProvider) {
-
-  }
+  constructor(private settings: SettingsProvider) {}
 
   get features() {
-    return settingsFeatures;
+    return this.settings.features;
   }
 
-  protected getSelectedOption(options: IFeatureOption[]) {
-    return _.find(options, (o) => o.selected);
+  toggleOptions(feature: SettingsOptionsFeatureModel) {
+
+    // if the same feature, collapse bar (clear options)
+    this.selectedFeature = this.selectedFeature == feature ? null : feature;
+    this.settings.onChange.trigger();
   }
 
-  isFeatureActive(feature: ISettingsFeature) {
-    if (feature.type === IFeatureType.options) {
-      return false;
-    }
+  toggleFeature(feature: SettingsToggleFeatureModel) {
+    this.hideOptionsPanel();
+    feature.toggle();
 
-    return feature.enabled;
+    this.settings.onChange.trigger();
   }
 
-  getFeatureTitle(feature: ISettingsFeature) {
-    if (feature.type === IFeatureType.options) {
-      return this.getSelectedOption(feature.options).name;
-    }
-
-    return feature.name;
+  hideOptionsPanel() {
+    this.selectedFeature = null;
   }
 
-  getFeatureIcon(feature: ISettingsFeature) {
-    if (feature.type === IFeatureType.options) {
-      return this.getSelectedOption(feature.options).icon;
-    }
-
-    return feature.icon;
-  }
-
-  toggleFeature(feature: ISettingsFeature) {
-    if (feature.type === IFeatureType.options) {
-      // if options already set, collapse bar (clear options)
-      this.options = this.options === feature.options ? null : feature.options;
-    } else {
-      this.options = null;
-      feature.enabled =  !feature.enabled;
-    }
-  }
-
-  selectOption(option: IFeatureOption) {
-    _.each(this.options, (o: IFeatureOption) => {
-      o.selected = false;
-    });
-    this.options = null;
-    option.selected = true;
+  selectOption(option: Settings.IFeatureOption) {
+    this.selectedFeature.setSelectedOption(option);
+    this.hideOptionsPanel();
   }
 }

@@ -9,23 +9,27 @@ import {WavesDirective} from '../common/index';
 
 import {ZoneConfig} from '../zones/index';
 import {ZoneModel} from '../zones/zone.model.ts';
-import {ZonesStoreProvider} from '../zones/zones-store.provider.ts';
 import {ZoneDirective} from '../directives/zone.directive.ts';
 import {ZONES} from '../config';
 import {SettingsPanelComponent} from '../settings/settings-panel/settings-panel.component.ts';
+import {StatusAreaComponent} from '../controls/status-area/status-area.component';
+import {SettingsProvider} from '../settings/settings.provider';
+import {ZonesStoreProvider} from '../zones/zones-store.provider';
 
 @Component({
   selector: 'home',
   providers: [
     ZonesStoreProvider,
-    TempControlProvider
+    TempControlProvider,
+    SettingsProvider
   ],
   directives: [
     WavesDirective,
     ZoneControlComponent,
     TempControlComponent,
     ZoneDirective,
-    SettingsPanelComponent
+    SettingsPanelComponent,
+    StatusAreaComponent
   ],
   pipes: [ ],
   template: require('./home.jade')

@@ -1,6 +1,8 @@
-import {ZoneConfig} from './zones';
+import {ZoneConfig} from './zones/index';
+import {Settings} from './interfaces';
+import {SettingsHoodAdapter} from "./settings/adapters/settings-hood-adapter";
 
-const ZONES : ZoneConfig[] = [
+export const ZONES : ZoneConfig[] = [
   {
     position: {
       left: '6%',
@@ -27,4 +29,45 @@ const ZONES : ZoneConfig[] = [
   },
 ];
 
-export {ZONES};
+export const SETTINGS_FEATURES  : Settings.IFeatureConfig[] = [
+  {
+    key: 'acMode',
+    inStatusBar: true,
+    type: Settings.IFeatureType.options,
+    adapter: '',
+    options: [
+      {
+        icon: 'snowflake',
+        key: 'cool',
+        name: 'Охлаждение',
+        selected: true,
+      },
+      {
+        icon: 'sun',
+        key: 'heat',
+        name: 'Обогрев'
+      },
+      {
+        icon: 'water-drop',
+        key: 'dry',
+        name: 'Осушение'
+      },
+    ],
+  },
+  {
+    icon: 'hood',
+    inStatusBar: true,
+    key: 'hood',
+    name: 'Вытяжка',
+    adapter: SettingsHoodAdapter,
+    type: Settings.IFeatureType.toggle,
+  },
+  {
+    icon: 'input-air',
+    inStatusBar: true,
+    key: 'inputAir',
+    name: 'Приток',
+    adapter: '',
+    type: Settings.IFeatureType.toggle,
+  },
+];

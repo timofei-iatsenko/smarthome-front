@@ -1,0 +1,8 @@
+include /tpl-components/common-components
+
++b.status-area
+  +e.item(*ngFor="#item of items", [ngClass]='{"status-area__item--active": item.isActive()}')
+    +icon('{{ item.getIcon() }}')
+  +e.item
+    +icon('thermometer')
+    span 2&deg;

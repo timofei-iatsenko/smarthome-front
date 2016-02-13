@@ -24,23 +24,23 @@ export class TempControlProvider {
   public currentTarget: ITempControllable;
   protected commonTemp: CommonTemperature = new CommonTemperature(24);
   protected _element: Element;
-  protected _commonTarget;
+  protected _isCommonMode;
 
   constructor() {
     this.setCommon();
   }
 
   isCommonMode() {
-    return this._commonTarget;
+    return this._isCommonMode;
   }
 
   setZone(zone: ITempControllable) {
-    this._commonTarget = false;
+    this._isCommonMode = false;
     this.currentTarget = zone;
   }
 
   setCommon() {
-    this._commonTarget = true;
+    this._isCommonMode = true;
     this.currentTarget = this.commonTemp;
   }
 
