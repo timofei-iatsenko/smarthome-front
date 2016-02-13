@@ -33,7 +33,7 @@ module.exports = {
   // static data for index.html
   metadata: metadata,
   // for faster builds use 'eval'
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   debug: true,
 
   entry: {
@@ -83,12 +83,10 @@ module.exports = {
       { test: /\.html$/,  loader: 'raw-loader' },
 
       { test: /\.jade$/,  loader: 'raw-loader!jade-html-loader' },
-
-      // if you add a loader include the resolve file extension above
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader!sass-loader?sourceMap'),
-      },
+        loader: "style-loader!css-loader?sourceMap!postcss-loader!sass-loader?sourceMap",
+      }
     ],
   },
   postcss: function () {
@@ -106,7 +104,6 @@ module.exports = {
     basedir: sourcePath
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
     new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js', minChunks: Infinity }),
     // static assets
     new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ]),
