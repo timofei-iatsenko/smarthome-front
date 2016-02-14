@@ -67,7 +67,16 @@ export class Home {
 
   ngOnInit() {
     _.map(ZONES, (zoneConfig) => {
-      this.zonesStore.add(new ZoneModel(zoneConfig));
+      const model = new ZoneModel(zoneConfig);
+      this.zonesStore.add(model);
+
+      model.onSetpointChanged.bind(_.debounce(() => {
+        this.backend.setZoneSetpoint(model.id, model.tempSetpoint);
+      }, 300));
+
+      model.onEnabledChanged.bind(_.debounce(() => {
+        this.backend.setZoneEnable(model.id, model.enabled);
+      }, 300));
     });
 
     this.backend.onData.bind((data) => {

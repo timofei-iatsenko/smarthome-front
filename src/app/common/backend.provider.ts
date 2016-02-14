@@ -47,6 +47,14 @@ export class BackendProvider {
     this._linkEvents();
   }
 
+  setZoneSetpoint(id: number, setpoint: number) {
+    this.socket.emit('gui.setZoneSetpoint', {id, setpoint});
+  }
+
+  setZoneEnable(id: number, value: boolean) {
+    this.socket.emit('gui.setZoneEnable', {id, value});
+  }
+
   protected _linkEvents() {
     this.socket.on('data', (resp) => {
       this.onData.trigger(resp);

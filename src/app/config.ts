@@ -6,6 +6,7 @@ export const BACKEND = {
   host: 'http://192.168.1.50',
 };
 
+export const TEMP_STEP: number  = 0.5;
 export const ZONES : ZoneConfig[] = [
   {
     position: {
