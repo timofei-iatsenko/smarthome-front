@@ -1,9 +1,8 @@
-import {Component, Input, ElementRef} from 'angular2/core';
+import {Component, Input, ElementRef, OnInit, OnDestroy} from 'angular2/core';
 import {WavesDirective} from '../../common/directives/waves';
 import {SettingsProvider} from '../../settings/settings.provider';
 import {XLinkDirective} from '../../directives/xlink.directive';
-import {OnInit} from 'angular2/core';
-import {OnDestroy} from "angular2/core";
+import {SettingsBaseFeatureModel} from '../../settings/settings-feature.model';
 
 @Component({
   selector: 'status-area',
@@ -20,7 +19,6 @@ export class StatusAreaComponent implements OnInit, OnDestroy {
   protected _removeWatcherFn;
 
   constructor(private settings: SettingsProvider) {
-    console.log(settings);
   }
 
   ngOnInit() {
@@ -36,11 +34,10 @@ export class StatusAreaComponent implements OnInit, OnDestroy {
   }
 
   _fetchItems() {
-    return _.filter(this.settings.features, (feature: any) => {
-      return feature.inStatusBar;
+    return _.filter(this.settings.features, (feature: SettingsBaseFeatureModel) => {
+      return feature.inStatusBar && feature.isActive();
     });
   }
-
 
   get items() {
     return this._items;
