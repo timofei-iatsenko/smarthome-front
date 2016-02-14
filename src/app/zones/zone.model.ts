@@ -1,5 +1,6 @@
 import {ControlPosition, ZoneConfig} from './index.ts';
 import {ITempControllable} from '../interfaces.ts';
+import {SimpleEvent} from '../libs/simple-event';
 
 export class ZoneModel implements ITempControllable {
   public ambientTemp: number;
@@ -10,6 +11,8 @@ export class ZoneModel implements ITempControllable {
   public controlPosition: ControlPosition;
   public id: number;
   public title: string;
+
+  public onSetpointChanged = new SimpleEvent();
 
   constructor(config: ZoneConfig) {
     this.controlPosition = config.position;
@@ -23,11 +26,13 @@ export class ZoneModel implements ITempControllable {
 
   public incrementTemp() {
     this.enable();
+    this.onSetpointChanged.trigger();
     this.tempSetpoint++;
   }
 
   public decrementTemp() {
     this.enable();
+    this.onSetpointChanged.trigger();
     this.tempSetpoint--;
   }
 

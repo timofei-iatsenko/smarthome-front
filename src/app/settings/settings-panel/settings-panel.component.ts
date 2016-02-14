@@ -4,7 +4,7 @@ import {SettingsProvider} from '../settings.provider.ts';
 import {XLinkDirective} from '../../directives/xlink.directive';
 import {Settings} from '../../interfaces';
 import {SettingsBaseFeatureModel, SettingsOptionsFeatureModel} from '../settings-feature.model';
-import {SettingsToggleFeatureModel} from "../settings-feature.model";
+import {SettingsToggleFeatureModel} from '../settings-feature.model';
 
 @Component({
   selector: 'settings-panel',

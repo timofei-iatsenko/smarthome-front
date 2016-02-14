@@ -12,7 +12,6 @@ export abstract class SettingsBaseFeatureModel {
     this._key = config.key;
     this.inStatusBar = config.inStatusBar;
 
-    console.log(typeof(config.adapter));
     if (typeof(config.adapter) ==  'function') {
       this.adapter =  new config.adapter;
     }

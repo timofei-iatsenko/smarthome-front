@@ -6,7 +6,8 @@ include /tpl-components/common-components
       +button()([ngClass] = '{active: feature.isActive()}')
         +icon('{{feature.getIcon()}}')
       +e('span').feature-title {{ feature.getTitle() }}
+
   +e.options-row(*ngIf="selectedFeature")
-    +e.option(*ngFor="#option of selectedFeature.getOptions()", (click) = 'selectOption(feature, option)')
-      +button()([ngClass] = '{active: option.selected}')
+    +e.option(*ngFor="#option of selectedFeature.getOptions()")
+      +button()([ngClass] = '{active: option.selected}', (click) = 'selectOption(option)')
         +icon('{{option.icon}}')
