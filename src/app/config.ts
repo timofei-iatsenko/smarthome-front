@@ -1,6 +1,10 @@
 import {ZoneConfig} from './zones/index';
 import {Settings} from './interfaces';
-import {SettingsHoodAdapter} from "./settings/adapters/settings-hood-adapter";
+import {SettingsHoodAdapter} from './settings/adapters/settings-hood-adapter';
+
+export const BACKEND = {
+  host: 'http://192.168.1.50',
+};
 
 export const ZONES : ZoneConfig[] = [
   {
@@ -8,7 +12,7 @@ export const ZONES : ZoneConfig[] = [
       left: '6%',
       top: '15%'
     },
-    id: 1,
+    id: 0,
     title: 'Спальня Тима'
   },
   {
@@ -16,15 +20,15 @@ export const ZONES : ZoneConfig[] = [
       right: '5%',
       top: '15%'
     },
-    id: 2,
+    id: 1,
     title: 'Спальня родители'
   },
   {
     position: {
       right: '5%',
-      bottom: '15%'
+      bottom: '20%'
     },
-    id: 3,
+    id: 2,
     title: 'Кабинет'
   },
 ];

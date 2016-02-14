@@ -6,6 +6,7 @@ import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
 import {Home} from './home/home';
+import {BackendProvider} from './common/backend.provider';
 
 
 require('./app.scss');
@@ -16,7 +17,7 @@ require('./app.scss');
  */
 @Component({
   selector: 'app',
-  providers: [ ...FORM_PROVIDERS ],
+  providers: [ ...FORM_PROVIDERS, BackendProvider],
   directives: [ ...ROUTER_DIRECTIVES],
   pipes: [],
   template: `

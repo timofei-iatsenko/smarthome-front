@@ -39,7 +39,7 @@
  *
  * This can reduce boilerplate code, and make classes cleaner.
  */
-export class SimpleEvent {
+export class SimpleEvent<T> {
 
   protected _handlers: Array<Function> = [];
 
@@ -48,7 +48,7 @@ export class SimpleEvent {
    * @param {function} fn
    * @return {function} unregister func
    */
-  bind(fn: Function) {
+  bind(fn: (arg?: T) => void) {
     this._handlers.push(fn);
 
     return () => {
@@ -59,7 +59,7 @@ export class SimpleEvent {
   /**
    * Bind handler which will be triggered just once
    */
-  bindOnce(fn: Function) {
+  bindOnce(fn: (arg?: T) => void) {
     this.bind(function _onceHandler() {
       fn.apply(fn, arguments);
       this.unbind(fn);
@@ -70,7 +70,7 @@ export class SimpleEvent {
    * Remove handler
    * @param {function} fn
    */
-  unbind(fn: Function) {
+  unbind(fn: (arg?: T) => void) {
     this._handlers.splice( this._handlers.indexOf(fn), 1);
   }
 
@@ -83,12 +83,11 @@ export class SimpleEvent {
 
   /**
    * Trigger current event
-   * @param args
    */
-  trigger(...args) {
+  trigger(arg?: T) {
     const length = this._handlers.length;
     for (let i = 0; i < length; i++) {
-      this._handlers[i].apply(this, args);
+      this._handlers[i].apply(this, arguments);
     }
   }
 }
