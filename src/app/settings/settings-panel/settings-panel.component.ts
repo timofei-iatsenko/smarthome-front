@@ -1,7 +1,7 @@
 import {Component, Input, ElementRef} from 'angular2/core';
-import {WavesDirective} from '../../common/directives/waves';
+import {WavesDirective} from '../../common/directives/waves.directive';
 import {SettingsProvider} from '../settings.provider.ts';
-import {XLinkDirective} from '../../directives/xlink.directive';
+import {XLinkDirective} from '../../common/directives/xlink.directive.ts';
 import {Settings} from '../../interfaces';
 import {SettingsBaseFeatureModel, SettingsOptionsFeatureModel} from '../settings-feature.model';
 import {SettingsToggleFeatureModel} from '../settings-feature.model';

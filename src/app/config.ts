@@ -3,7 +3,7 @@ import {Settings} from './interfaces';
 import {SettingsHoodAdapter} from './settings/adapters/settings-hood-adapter';
 
 export const BACKEND = {
-  host: 'http://192.168.1.50',
+  host: process.env.ENV == 'production' ? undefined : 'http://192.168.1.50',
 };
 
 export const TEMP_STEP: number  = 0.5;

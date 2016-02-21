@@ -1,45 +1,38 @@
 import {Component} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
-import {Http} from 'angular2/http';
 
 import {ZoneControlComponent} from '../controls/zone-control/zone-control.component.ts';
 import {TempControlComponent} from '../controls/temp-control/temp-control.component.ts';
 import {TempControlProvider} from '../controls/temp-control/temp-control.provider.ts';
-import {WavesDirective} from '../common/index';
 
 import {ZoneConfig} from '../zones/index';
 import {ZoneModel} from '../zones/zone.model.ts';
 import {ZoneDirective} from '../directives/zone.directive.ts';
-import {ZONES} from '../config';
 import {SettingsPanelComponent} from '../settings/settings-panel/settings-panel.component.ts';
 import {StatusAreaComponent} from '../controls/status-area/status-area.component';
 import {SettingsProvider} from '../settings/settings.provider';
 import {ZonesStoreProvider} from '../zones/zones-store.provider';
-import {BackendProvider} from '../common/backend.provider';
 
 @Component({
   selector: 'home',
   providers: [
-    ZonesStoreProvider,
     TempControlProvider,
     SettingsProvider
   ],
   directives: [
-    WavesDirective,
+    ZoneDirective,
     ZoneControlComponent,
     TempControlComponent,
-    ZoneDirective,
     SettingsPanelComponent,
     StatusAreaComponent
   ],
-  pipes: [ ],
   template: require('./home.jade')
 })
 export class Home {
   settingsExpanded = false;
   zones: ZoneModel[];
 
-  constructor(private zonesStore: ZonesStoreProvider, private backend: BackendProvider) {
+  constructor(private zonesStore: ZonesStoreProvider) {
 
   }
 
@@ -55,40 +48,7 @@ export class Home {
     this.settingsExpanded = !this.settingsExpanded;
   }
 
-  _updateZoneFromBackend(zoneData) {
-    const zone = this.zonesStore.getById(zoneData.id);
-    console.log(zone, zoneData);
-
-    zone.ambientTemp = zoneData.ambientTemp;
-    zone.tempSetpoint = zoneData.tempSetpoint;
-    zone.enabled = zoneData.enabled;
-  }
-
-
   ngOnInit() {
-    _.map(ZONES, (zoneConfig) => {
-      const model = new ZoneModel(zoneConfig);
-      this.zonesStore.add(model);
-
-      model.onSetpointChanged.bind(_.debounce(() => {
-        this.backend.setZoneSetpoint(model.id, model.tempSetpoint);
-      }, 300));
-
-      model.onEnabledChanged.bind(_.debounce(() => {
-        this.backend.setZoneEnable(model.id, model.enabled);
-      }, 300));
-    });
-
-    this.backend.onData.bind((data) => {
-      _.each(data.zones, (zoneData) => {
-        this._updateZoneFromBackend(zoneData);
-      });
-    });
-
-    this.backend.onZoneChanged.bind((zoneData) => {
-      this._updateZoneFromBackend(zoneData);
-    });
-
     this.zones = this.zonesStore.items;
   }
 }

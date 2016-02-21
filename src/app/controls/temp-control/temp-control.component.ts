@@ -1,14 +1,10 @@
 import {Component, Input, ElementRef} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
-import {WavesDirective} from '../../common/directives/waves';
 import {TempControlProvider} from './temp-control.provider';
 
 
 @Component({
   selector: 'temp-control',
-  directives: [
-    WavesDirective,
-  ],
   template: require('./temp-control.tpl.jade')
 })
 

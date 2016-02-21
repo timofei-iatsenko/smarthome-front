@@ -42,6 +42,7 @@ export class BackendProvider {
   protected socket: SocketIO.Socket = io.connect(BACKEND.host);
   public onData = new SimpleEvent<Backend.BootstrapData>();
   public onZoneChanged = new SimpleEvent<Backend.Zone>();
+  public onAcUnitChanged = new SimpleEvent<Backend.AcUnit>();
 
   constructor() {
     this._linkEvents();
@@ -61,7 +62,11 @@ export class BackendProvider {
     });
 
     this.socket.on('zoneChanged', (resp) => {
-      this.onZoneChanged.trigger(resp.data);
+      this.onZoneChanged.trigger(resp);
+    });
+
+    this.socket.on('acUnitChanged', (resp) => {
+      this.onAcUnitChanged.trigger(resp);
     });
   }
 }

@@ -1,14 +1,10 @@
 import {Component, Input, ElementRef} from 'angular2/core';
-import {WavesDirective} from '../../common/directives/waves';
 import {ZoneModel} from '../../zones/zone.model.ts';
 
 var jQuery: JQueryStatic = require('jquery');
 
 @Component({
   selector: 'zone-control',
-  directives: [
-    WavesDirective
-  ],
   template: require('./zone-control.tpl.jade')
 })
 export class ZoneControlComponent {

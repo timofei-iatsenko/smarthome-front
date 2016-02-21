@@ -1,8 +1,12 @@
 include /tpl-components/common-components
 
 +b.status-area
+  +e.item([m]='{active: acEnabled}')
+    +icon('power2')
+
   +e.item(*ngFor="#item of items")
     +icon('{{ item.getIcon() }}')
-  +e.item
-    +icon('thermometer')
-    span 2&deg;
+
+  //+e.item
+  //  +icon('thermometer')
+  //  span 2&deg;

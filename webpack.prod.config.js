@@ -14,18 +14,22 @@ var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+var SvgStore = require('webpack-svgstore-plugin');
 var WebpackMd5Hash    = require('webpack-md5-hash');
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 var HOST = process.env.HOST || 'localhost';
 var PORT = process.env.PORT || 8080;
 
 var metadata = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'SmartHome ClimateControl App',
   baseUrl: '/',
   host: HOST,
   port: PORT,
   ENV: ENV
 };
+
+var sourcePath = root('src');
 
 /*
  * Config
@@ -34,7 +38,6 @@ module.exports = {
   // static data for index.html
   metadata: metadata,
   // for faster builds use 'eval'
-  devtool: 'source-map',
   debug: true,
 
   entry: {
@@ -94,12 +97,29 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/,  loader: 'raw-loader' },
 
-      // if you add a loader include the file extension
-    ]
+      { test: /\.jade$/,  loader: 'raw-loader!jade-html-loader' },
+      {
+        test: /\.scss$/,
+        loader: "style-loader!css-loader!postcss-loader!sass-loader",
+      }
+    ],
   },
-
+  postcss: function () {
+    return [autoprefixer];
+  },
+  jadeLoader: {
+    locals: {
+      bem: require('bem-jade')({
+        prefix: '',
+        element: '__',
+        modifier: '--',
+        default_tag: 'div',
+      })
+    },
+    basedir: sourcePath
+  },
   plugins: [
     new WebpackMd5Hash(),
     new DedupePlugin(),
@@ -127,6 +147,11 @@ module.exports = {
         'NODE_ENV': JSON.stringify(metadata.ENV)
       }
     }),
+    new SvgStore(path.join(sourcePath, 'icons', '**/*.svg'), '', {
+      name: '[hash].sprite.svg',
+      prefix: '',
+      chunk: 'main'
+    }),
     new ProvidePlugin({
       // TypeScript helpers
       '__metadata': 'ts-helper/metadata',
@@ -134,7 +159,10 @@ module.exports = {
       '__awaiter': 'ts-helper/awaiter',
       '__extends': 'ts-helper/extends',
       '__param': 'ts-helper/param',
-      'Reflect': 'es7-reflect-metadata/dist/browser'
+      'Reflect': 'es7-reflect-metadata/dist/browser',
+      $: "jquery",
+      jQuery: "jquery",
+      _: "lodash"
     }),
     new UglifyJsPlugin({
       // beautify: true,

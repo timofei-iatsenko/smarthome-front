@@ -10,7 +10,7 @@
   <meta name="description" content="{%= o.webpackConfig.metadata.title %}">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
-  <!-- end favicon
+  <meta name="theme-color" content="#1d1a2a">
 
   <!-- Remove Tap Highlight on Windows Phone IE -->
   <meta name="msapplication-tap-highlight" content="no"/>
@@ -35,7 +35,6 @@
   <script src="http://{%= o.webpackConfig.metadata.host %}:{%= o.webpackConfig.metadata.port %}/webpack-dev-server.js"></script>
   {% } %}
 
-  <!-- Webpack HtmlWebpackPlugin manually inject scripts -->
   {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
   <script src="{%= o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
   {% } %}
