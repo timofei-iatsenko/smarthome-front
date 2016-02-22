@@ -4,6 +4,7 @@ import {FORM_DIRECTIVES} from 'angular2/common';
 import {ZoneControlComponent} from '../controls/zone-control/zone-control.component.ts';
 import {TempControlComponent} from '../controls/temp-control/temp-control.component.ts';
 import {TempControlProvider} from '../controls/temp-control/temp-control.provider.ts';
+import {ReconnectOverlayComponent} from '../controls/reconnect-overlay/reconnect-overlay.component';
 
 import {ZoneConfig} from '../zones/index';
 import {ZoneModel} from '../zones/zone.model.ts';
@@ -12,6 +13,7 @@ import {SettingsPanelComponent} from '../settings/settings-panel/settings-panel.
 import {StatusAreaComponent} from '../controls/status-area/status-area.component';
 import {SettingsProvider} from '../settings/settings.provider';
 import {ZonesStoreProvider} from '../zones/zones-store.provider';
+
 
 @Component({
   selector: 'home',
@@ -24,7 +26,8 @@ import {ZonesStoreProvider} from '../zones/zones-store.provider';
     ZoneControlComponent,
     TempControlComponent,
     SettingsPanelComponent,
-    StatusAreaComponent
+    StatusAreaComponent,
+    ReconnectOverlayComponent
   ],
   template: require('./home.jade')
 })

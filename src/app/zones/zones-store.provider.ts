@@ -19,6 +19,10 @@ export class ZonesStoreProvider {
     });
   }
 
+  filter(predicate: (ZoneModel) => boolean): ZoneModel[] {
+    return _.filter(this._items, predicate);
+  }
+
   getById(id: number): ZoneModel  {
     return _.find(this._items, (item) => {
       return item.id == id;

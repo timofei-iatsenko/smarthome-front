@@ -1,6 +1,8 @@
 import {Injectable, NgZone} from 'angular2/core';
 import {BACKEND} from '../config';
 import {SimpleEvent} from '../libs/simple-event';
+import {ZoneModel} from '../zones/zone.model';
+import {IZoneModelDto} from '../zones/zone.model';
 
 declare var io;
 
@@ -28,6 +30,7 @@ export module Backend {
     enabled: boolean;
     id: number;
     tempSetpoint: number;
+    sync: boolean;
   }
 
   export interface BootstrapData {
@@ -43,9 +46,15 @@ export class BackendProvider {
   public onData = new SimpleEvent<Backend.BootstrapData>();
   public onZoneChanged = new SimpleEvent<Backend.Zone>();
   public onAcUnitChanged = new SimpleEvent<Backend.AcUnit>();
+  public connected = false;
 
   constructor() {
     this._linkEvents();
+  }
+
+  changeZone(id: number, data: IZoneModelDto) {
+    console.log('emit change zone');
+    this.socket.emit('gui.changeZone', {id, data});
   }
 
   setZoneSetpoint(id: number, setpoint: number) {
@@ -67,6 +76,14 @@ export class BackendProvider {
 
     this.socket.on('acUnitChanged', (resp) => {
       this.onAcUnitChanged.trigger(resp);
+    });
+
+    this.socket.on('disconnect', () => {
+      this.connected = false;
+    });
+
+    this.socket.on('connect', () => {
+      this.connected = true;
     });
   }
 }

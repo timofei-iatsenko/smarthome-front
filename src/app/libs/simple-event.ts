@@ -43,6 +43,18 @@ export class SimpleEvent<T> {
 
   protected _handlers: Array<Function> = [];
 
+
+  static some(...events) {
+    const wrap = new SimpleEvent();
+
+    // potential memory leak here, if all listeners of wrap event will be removed, wrap events still be exist in memory
+    _.each(events, (event) => {
+        event.bind(() => wrap.trigger());
+    });
+
+    return wrap;
+  }
+
   /**
    * Bind handler to this event
    * @param {function} fn
