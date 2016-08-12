@@ -4,7 +4,7 @@ import {SimpleEvent} from '../libs/simple-event';
 import {ZoneModel} from '../zones/zone.model';
 import {IZoneModelDto} from '../zones/zone.model';
 
-declare var io;
+import io = require('socket.io-client');
 
 export module Backend {
 
@@ -36,13 +36,15 @@ export module Backend {
   export interface BootstrapData {
     acUnit: AcUnit;
     zones: Zone[];
+    intakeFanEnabled: boolean;
+    exhaustFanEnabled: boolean;
   }
 }
 
 @Injectable()
 export class BackendProvider {
 
-  protected socket: SocketIO.Socket = io.connect(BACKEND.host);
+  public socket: SocketIOClient.Socket = io.connect(BACKEND.host);
   public onData = new SimpleEvent<Backend.BootstrapData>();
   public onZoneChanged = new SimpleEvent<Backend.Zone>();
   public onAcUnitChanged = new SimpleEvent<Backend.AcUnit>();
@@ -50,6 +52,10 @@ export class BackendProvider {
 
   constructor() {
     this._linkEvents();
+  }
+
+  get connected() {
+    return this.socket.connected;
   }
 
   changeZone(id: number, data: IZoneModelDto) {
@@ -76,14 +82,6 @@ export class BackendProvider {
 
     this.socket.on('acUnitChanged', (resp) => {
       this.onAcUnitChanged.trigger(resp);
-    });
-
-    this.socket.on('disconnect', () => {
-      this.connected = false;
-    });
-
-    this.socket.on('connect', () => {
-      this.connected = true;
     });
   }
 }

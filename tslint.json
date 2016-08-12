@@ -28,7 +28,6 @@
       true, 
       ["log", "error"]
     ],
-    "no-trailing-comma": true,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
     "no-unused-variable": false,

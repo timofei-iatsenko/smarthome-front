@@ -1,6 +1,8 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, Injector} from 'angular2/core';
 import {SETTINGS_FEATURES} from '../config';
 import {Settings} from '../interfaces';
+import {BackendProvider} from '../common/backend.provider';
+import {SettingsProvider} from './settings.provider';
 
 @Injectable()
 export abstract class SettingsBaseFeatureModel {
@@ -8,12 +10,12 @@ export abstract class SettingsBaseFeatureModel {
   inStatusBar: boolean;
   adapter: Settings.IAdapter;
 
-  constructor(config: Settings.IFeatureConfig) {
+  constructor(config: Settings.IFeatureConfig, protected backend: BackendProvider, protected settings: SettingsProvider) {
     this._key = config.key;
     this.inStatusBar = config.inStatusBar;
 
     if (typeof(config.adapter) ==  'function') {
-      this.adapter =  new config.adapter;
+      this.adapter =  new config.adapter(backend, settings);
     }
   }
 
@@ -28,18 +30,18 @@ export class SettingsToggleFeatureModel extends SettingsBaseFeatureModel {
   protected _name: string;
   protected _enabled: boolean;
 
-  constructor(config: Settings.IFeatureConfig) {
-    super(config);
+  constructor(config: Settings.IFeatureConfig, protected backend: BackendProvider, protected settings: SettingsProvider) {
+    super(config, backend, settings);
 
     this._icon = config.icon;
     this._name = config.name;
   }
 
   toggle(): void {
-    this._enabled = !this._enabled;
-
     if (this.adapter) {
-      this.adapter.setValue(this._enabled);
+      this.adapter.setValue(!this.adapter.getValue());
+    } else {
+      this._enabled = !this._enabled;
     }
   }
 
@@ -68,8 +70,8 @@ export class SettingsOptionsFeatureModel extends SettingsBaseFeatureModel {
 
   protected _options: Settings.IFeatureOption[];
 
-  constructor(config: Settings.IFeatureConfig) {
-    super(config);
+  constructor(config: Settings.IFeatureConfig, protected backend: BackendProvider, protected settings: SettingsProvider) {
+    super(config, backend, settings);
     this._options = config.options;
   }
 

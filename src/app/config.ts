@@ -1,6 +1,7 @@
 import {ZoneConfig} from './zones/index';
 import {Settings} from './interfaces';
-import {SettingsHoodAdapter} from './settings/adapters/settings-hood-adapter';
+import {SettingsExhaustFanAdapter} from './settings/adapters/settings-exhaust-fan-adapter';
+import {SettingsIntakeFanAdapter} from './settings/adapters/settings-intake-fan-adapter';
 
 export const BACKEND = {
   host: process.env.ENV == 'production' ? undefined : 'http://192.168.1.50',
@@ -64,7 +65,7 @@ export const SETTINGS_FEATURES  : Settings.IFeatureConfig[] = [
     inStatusBar: true,
     key: 'hood',
     name: 'Вытяжка',
-    adapter: SettingsHoodAdapter,
+    adapter: SettingsExhaustFanAdapter,
     type: Settings.IFeatureType.toggle,
   },
   {
@@ -72,7 +73,7 @@ export const SETTINGS_FEATURES  : Settings.IFeatureConfig[] = [
     inStatusBar: true,
     key: 'inputAir',
     name: 'Приток',
-    adapter: '',
+    adapter: SettingsIntakeFanAdapter,
     type: Settings.IFeatureType.toggle,
   },
 ];

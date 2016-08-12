@@ -31,3 +31,4 @@ import 'rxjs';
 import 'node-waves';
 import 'lodash';
 import 'jquery';
+import 'socket.io-client';
