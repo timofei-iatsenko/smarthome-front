@@ -5,6 +5,8 @@
 
 This project is home ClimateControl mobile web app, it is client side for [Smarthome](https://github.com/thekip/smarthome) project 
 
+![image](https://cloud.githubusercontent.com/assets/1586852/18437841/6e0e5a2a-7907-11e6-87b8-30445acaf658.png)
+
 ### Quick start
 > Clone/Download the repo
 
