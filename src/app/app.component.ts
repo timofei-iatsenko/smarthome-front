@@ -56,12 +56,12 @@ export class AppComponent implements OnInit {
         this.updateZoneFromBackend(zoneData);
       });
 
-      Object.assign(this.acUnit, data.acUnit);
+      this.acUnit.setData(data.acUnit);
     });
 
     this.backend.onAcUnitChanged.bind((data) => {
       console.log('AcUnitChanged event');
-      Object.assign(this.acUnit, data);
+      this.acUnit.setData(data);
     });
 
     this.backend.onZoneChanged.bind((zoneData) => {

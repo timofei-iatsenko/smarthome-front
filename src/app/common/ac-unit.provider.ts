@@ -8,4 +8,8 @@ export class AcUnitProvider {
   fanSpeed: number;
   tempSetpoint: number;
   unitMode: Backend.AcUnitMode;
+
+  setData(data: Backend.AcUnit) {
+    Object.assign(this, data);
+  }
 }
