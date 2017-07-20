@@ -17,32 +17,22 @@ export class ZoneDirective implements AfterViewInit, OnDestroy {
     directives.push(this);
   }
 
-  get selected(): boolean {
-    return this.zoneModel.selected;
-  }
-
-  set selected(value: boolean) {
-    this.zoneModel.selected = value;
-  }
-
   get zoneModel() {
     return this.zones.getById(+this.zoneId);
   }
 
   select() {
-    this.tempControl.setZone(this.zoneModel);
-    this.selected = true;
+    this.zoneModel.selected = true;
     this.element.nativeElement.classList.add('selected');
   }
 
   clear() {
-    this.tempControl.setCommon();
-    this.selected = false;
+    this.zoneModel.selected = false;
     this.element.nativeElement.classList.remove('selected');
   }
 
   triggerSelection() {
-    this.selected ? this.clear() : this.select();
+    this.zoneModel.selected ? this.clear() : this.select();
   }
 
   @HostListener('click')
@@ -65,7 +55,7 @@ export class ZoneDirective implements AfterViewInit, OnDestroy {
   }
 
   private clickOutsideHandler(e: MouseEvent) {
-    if (!this.selected) {
+    if (!this.zoneModel.selected) {
       return;
     }
 

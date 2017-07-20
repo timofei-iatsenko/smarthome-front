@@ -13,9 +13,6 @@ export class ZonesStoreProvider {
     return this.items.find((item) => item.selected);
   }
 
-  filter(predicate: (ZoneModel) => boolean): ZoneModel[] {
-    return this.items.filter(predicate);
-  }
 
   getById(id: number): ZoneModel {
     return this.items.find((item) => item.id === id);
