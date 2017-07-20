@@ -22,6 +22,6 @@ export class SettingsAcModeAdapter implements ISettingsAdapter {
   }
 
   getValue(): number {
-    return this.mode;
+    return this.mode || Backend.AcUnitMode.COOL;
   }
 }
