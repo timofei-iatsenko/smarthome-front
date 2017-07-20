@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   NgModule,
@@ -67,7 +66,6 @@ type StoreType = {
    */
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
   ],
   /**
@@ -112,7 +110,7 @@ export class AppModule {
     /**
      * Save state
      */
-    store.state = this.appState._state;;
+    store.state = this.appState._state;
     /**
      * Recreate root elements
      */
