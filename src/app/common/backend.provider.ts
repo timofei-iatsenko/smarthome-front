@@ -14,12 +14,11 @@ export module Backend {
   }
 
   export interface AcUnit {
-    MODES: Object;
     ambientTemp: number;
     enabled: boolean;
     fanSpeed: number;
     tempSetpoint: number;
-    unitMode: AcUnitMode;
+    mode: AcUnitMode;
   }
 
   export interface Zone {
