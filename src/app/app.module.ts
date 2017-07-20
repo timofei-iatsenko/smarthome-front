@@ -18,14 +18,12 @@ import { ZoneDirective } from './directives/zone.directive';
 import { SettingsPanelComponent } from './settings/settings-panel/settings-panel.component';
 import { StatusAreaComponent } from './controls/status-area/status-area.component';
 
-
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
 // App is our top level component
 import { AppComponent } from './app.component';
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
@@ -33,7 +31,6 @@ import { COMMON_DIRECTIVES } from './common/directives';
 
 // Application wide providers
 const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
   AppState
 ];
 
