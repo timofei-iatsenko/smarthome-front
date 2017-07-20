@@ -1,7 +1,6 @@
-import {ISettingsAdapter} from './settings-adapter.interface';
-import {BackendProvider} from '../../common/backend.provider';
-import {SettingsProvider} from '../settings.provider';
-
+import { ISettingsAdapter } from './settings-adapter.interface';
+import { BackendProvider } from '../../common/backend.provider';
+import { SettingsProvider } from '../settings.provider';
 
 export class SettingsIntakeFanAdapter implements ISettingsAdapter {
   private enabled = false;

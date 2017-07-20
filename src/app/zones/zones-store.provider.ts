@@ -1,32 +1,23 @@
-import {Injectable} from 'angular2/core';
-import {ZoneModel} from './zone.model.ts';
+import { Injectable } from '@angular/core';
+import { ZoneModel } from './zone.model';
 
 @Injectable()
 export class ZonesStoreProvider {
-  protected _items: Array<ZoneModel> = [];
+  public items: ZoneModel[] = [];
 
   add(zone: ZoneModel) {
-    this._items.push(zone);
-  }
-
-  get items() {
-    return this._items;
+    this.items.push(zone);
   }
 
   get selected(): ZoneModel {
-    return _.find(this._items, (item) => {
-      return item.selected;
-    });
+    return this.items.find((item) => item.selected);
   }
 
   filter(predicate: (ZoneModel) => boolean): ZoneModel[] {
-    return _.filter(this._items, predicate);
+    return this.items.filter(predicate);
   }
 
-  getById(id: number): ZoneModel  {
-    return _.find(this._items, (item) => {
-      return item.id == id;
-    });
+  getById(id: number): ZoneModel {
+    return this.items.find((item) => item.id === id);
   }
-
 }

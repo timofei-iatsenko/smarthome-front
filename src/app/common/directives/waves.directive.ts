@@ -1,6 +1,6 @@
-import {Directive, Component, ElementRef, Renderer} from 'angular2/core';
+import { Directive, Component, ElementRef, Renderer } from '@angular/core';
+import Waves from 'node-waves';
 
-const Waves = require('node-waves');
 let inited = false;
 
 @Directive({

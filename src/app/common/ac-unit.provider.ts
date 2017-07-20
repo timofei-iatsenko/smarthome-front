@@ -1,5 +1,5 @@
-import {Backend, BackendProvider} from './backend.provider';
-import {Injectable} from 'angular2/core';
+import { Backend } from './backend.provider';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AcUnitProvider {
@@ -9,5 +9,3 @@ export class AcUnitProvider {
   tempSetpoint: number;
   unitMode: Backend.AcUnitMode;
 }
-
-

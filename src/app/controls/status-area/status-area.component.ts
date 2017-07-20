@@ -1,44 +1,40 @@
-import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {SettingsProvider} from '../../settings/settings.provider';
-import {SettingsBaseFeatureModel} from '../../settings/settings-feature.model';
-import {AcUnitProvider} from '../../common/ac-unit.provider';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SettingsProvider } from '../../settings/settings.provider';
+import { SettingsBaseFeatureModel } from '../../settings/settings-feature.model';
+import { AcUnitProvider } from '../../common/ac-unit.provider';
+import template from './status-area.tpl.jade';
 
 @Component({
   selector: 'status-area',
-  template: require('./status-area.tpl.jade')
+  template
 })
 
 export class StatusAreaComponent implements OnInit, OnDestroy {
 
-  protected _items;
-  protected _removeWatcherFn;
+  public items;
+  protected removeWatcherFn;
 
-  constructor(private settings: SettingsProvider, private acUnit: AcUnitProvider) {
-  }
+  constructor(private settings: SettingsProvider, private acUnit: AcUnitProvider) {}
 
   ngOnInit() {
-    this._items =  this._fetchItems();
+    this.items = this.fetchItems();
 
-    this._removeWatcherFn = this.settings.onChange.bind(() => {
-      this._items =  this._fetchItems();
+    this.removeWatcherFn = this.settings.onChange.bind(() => {
+      this.items = this.fetchItems();
     });
   }
 
   ngOnDestroy() {
-    this._removeWatcherFn();
+    this.removeWatcherFn();
   }
 
-  _fetchItems() {
-    return _.filter(this.settings.features, (feature: SettingsBaseFeatureModel) => {
+  private fetchItems() {
+    return this.settings.features.filter((feature: SettingsBaseFeatureModel) => {
       return feature.inStatusBar && feature.isActive();
     });
   }
 
   get acEnabled() {
     return this.acUnit.enabled;
-  }
-
-  get items() {
-    return this._items;
   }
 }

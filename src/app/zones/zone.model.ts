@@ -1,8 +1,8 @@
-import {ControlPosition, ZoneConfig} from './index.ts';
-import {ITempControllable} from '../interfaces.ts';
-import {SimpleEvent} from '../libs/simple-event';
-import {TEMP_STEP} from '../config';
-import {Backend} from '../common/backend.provider';
+import { ControlPosition, ZoneConfig } from './index';
+import { ITempControllable } from '../interfaces';
+import { SimpleEvent } from '../libs/simple-event';
+import { TEMP_STEP } from '../config';
+import { Backend } from '../common/backend.provider';
 
 export interface IZoneModelDto {
   enabled: boolean;
@@ -12,7 +12,6 @@ export interface IZoneModelDto {
 
 export class ZoneModel implements ITempControllable {
   public ambientTemp: number;
-  protected _tempSetpoint: number;
   public enabled: boolean;
   public selected: boolean;
   public _sync: boolean;
@@ -23,6 +22,8 @@ export class ZoneModel implements ITempControllable {
   public onSetpointChanged = new SimpleEvent();
   public onEnabledChanged = new SimpleEvent();
   public onSyncChanged = new SimpleEvent();
+
+  private _tempSetpoint: number;
 
   constructor(config: ZoneConfig) {
     this.controlPosition = config.position;
@@ -80,7 +81,7 @@ export class ZoneModel implements ITempControllable {
   }
 
   public toggleEnabled() {
-     this.enabled ? this.disable() : this.enable();
+    this.enabled ? this.disable() : this.enable();
   }
 
   getDto(): IZoneModelDto {
@@ -90,7 +91,7 @@ export class ZoneModel implements ITempControllable {
       enabled: null,
     };
 
-    _.each(dto, (val, prop) => {
+    Object.keys(dto).forEach((prop) => {
       dto[prop] = this[prop];
     });
 

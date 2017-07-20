@@ -1,145 +1,113 @@
-import {isPresent, isString, StringWrapper, isBlank, isArray} from 'angular2/src/facade/lang';
 import {
-  DoCheck,
-  OnDestroy,
   Directive,
+  DoCheck,
   ElementRef,
+  Input,
+  IterableChanges,
   IterableDiffer,
   IterableDiffers,
+  KeyValueChanges,
   KeyValueDiffer,
   KeyValueDiffers,
-  Renderer
-} from 'angular2/core';
-import {StringMapWrapper, isListLikeIterable} from 'angular2/src/facade/collection';
-import {OnInit} from 'angular2/core';
+  Renderer,
+  ɵisListLikeIterable as isListLikeIterable,
+  ɵstringify as stringify
+} from '@angular/core';
+import { NgClass } from '@angular/common';
 
 /**
- * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
- * an expression's evaluation result.
+ * @ngModule CommonModule
  *
- * The result of an expression evaluation is interpreted differently depending on type of
- * the expression evaluation result:
- * - `string` - all the CSS classes listed in a string (space delimited) are added
- * - `Array` - all the CSS classes (Array elements) are added
- * - `Object` - each key corresponds to a CSS class name while values are interpreted as expressions
- * evaluating to `Boolean`. If a given expression evaluates to `true` a corresponding CSS class
- * is added - otherwise it is removed.
+ * @whatItDoes Adds and removes CSS classes on an HTML element.
  *
- * While the `NgClass` directive can interpret expressions evaluating to `string`, `Array`
- * or `Object`, the `Object`-based version is the most often used and has an advantage of keeping
- * all the CSS class names in a template.
- *
- * ### Example ([live demo](http://plnkr.co/edit/a4YdtmWywhJ33uqfpPPn?p=preview)):
- *
+ * @howToUse
  * ```
- * import {Component} from 'angular2/core';
- * import {NgClass} from 'angular2/common';
+ *     <some-element [ngClass]="'first second'">...</some-element>
  *
- * @Component({
- *   selector: 'toggle-button',
- *   inputs: ['isDisabled'],
- *   template: `
- *      <div class="button" [ngClass]="{active: isOn, disabled: isDisabled}"
- *          (click)="toggle(!isOn)">
- *          Click me!
- *      </div>`,
- *   styles: [`
- *     .button {
- *       width: 120px;
- *       border: medium solid black;
- *     }
+ *     <some-element [ngClass]="['first', 'second']">...</some-element>
  *
- *     .active {
- *       background-color: red;
- *    }
+ *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
  *
- *     .disabled {
- *       color: gray;
- *       border: medium solid gray;
- *     }
- *   `]
- *   directives: [NgClass]
- * })
- * class ToggleButton {
- *   isOn = false;
- *   isDisabled = false;
+ *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
  *
- *   toggle(newState) {
- *     if (!this.isDisabled) {
- *       this.isOn = newState;
- *     }
- *   }
- * }
+ *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
  * ```
+ *
+ * @description
+ *
+ * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+ * - `string` - the CSS classes listed in the string (space delimited) are added,
+ * - `Array` - the CSS classes declared as Array elements are added,
+ * - `Object` - keys are CSS classes that get added when the expression given in the value
+ *              evaluates to a truthy value, otherwise they are removed.
+ *
+ * @stable
  */
-@Directive({selector: '[m]', inputs: ['rawClass: m', 'initialClasses: class']})
-export class MDirective implements DoCheck, OnDestroy {
-  private _differ: any;
-  private _mode: string;
-  private _initialClasses = [];
-  private _rawClass;
-  private _bemName;
+@Directive({selector: '[m]'})
+export class MDirective implements DoCheck {
+  private _iterableDiffer: IterableDiffer<string> | null;
+  private _keyValueDiffer: KeyValueDiffer<string, any> | null;
+  private _initialClasses: string[] = [];
+  private _rawClass: string[] | Set<string> | { [klass: string]: any };
+  private _bemBlock: string;
 
   constructor(private _iterableDiffers: IterableDiffers, private _keyValueDiffers: KeyValueDiffers,
-              private _ngEl: ElementRef, private _renderer: Renderer) {}
+              private _ngEl: ElementRef, private _renderer: Renderer) {
+  }
 
-  set initialClasses(v) {
+  @Input('class')
+  set klass(v: string) {
+    this._bemBlock = this._initialClasses[0];
     this._applyInitialClasses(true);
-    this._initialClasses = isPresent(v) && isString(v) ? v.split(' ') : [];
-    this._bemName = this._initialClasses[0];
+    this._initialClasses = typeof v === 'string' ? v.split(/\s+/) : [];
     this._applyInitialClasses(false);
     this._applyClasses(this._rawClass, false);
   }
 
-  set rawClass(v) {
+  @Input()
+  set m(v: string | string[] | Set<string> | { [klass: string]: any }) {
     this._cleanupClasses(this._rawClass);
 
-    if (isString(v)) {
-      v = v.split(' ');
-    }
+    this._iterableDiffer = null;
+    this._keyValueDiffer = null;
 
-    this._rawClass = v;
-    if (isPresent(v)) {
-      if (isListLikeIterable(v)) {
-        this._differ = this._iterableDiffers.find(v).create(null);
-        this._mode = 'iterable';
+    this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
+
+    if (this._rawClass) {
+      if (isListLikeIterable(this._rawClass)) {
+        this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
       } else {
-        this._differ = this._keyValueDiffers.find(v).create(null);
-        this._mode = 'keyValue';
+        this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
       }
-    } else {
-      this._differ = null;
     }
   }
-
 
   ngDoCheck(): void {
-    if (isPresent(this._differ)) {
-      var changes = this._differ.diff(this._rawClass);
-      if (isPresent(changes)) {
-        if (this._mode == 'iterable') {
-          this._applyIterableChanges(changes);
-        } else {
-          this._applyKeyValueChanges(changes);
-        }
+    if (this._iterableDiffer) {
+      const iterableChanges = this._iterableDiffer.diff(this._rawClass as string[]);
+      if (iterableChanges) {
+        this._applyIterableChanges(iterableChanges);
+      }
+    } else if (this._keyValueDiffer) {
+      const keyValueChanges = this._keyValueDiffer.diff(this._rawClass as{ [k: string]: any });
+      if (keyValueChanges) {
+        this._applyKeyValueChanges(keyValueChanges);
       }
     }
   }
 
-  ngOnDestroy(): void { this._cleanupClasses(this._rawClass); }
-
   private _getBemClassName(bemModifier) {
-    return `${this._bemName}--${bemModifier}`;
+    return `${this._bemBlock}--${bemModifier}`;
   }
 
-  private _cleanupClasses(rawClassVal): void {
+  private _cleanupClasses(rawClassVal: string[] | { [klass: string]: any }): void {
     this._applyClasses(rawClassVal, true);
     this._applyInitialClasses(false);
   }
 
-  private _applyKeyValueChanges(changes: any): void {
-    changes.forEachAddedItem((record) => { this._toggleClass(record.key, record.currentValue); });
-    changes.forEachChangedItem((record) => { this._toggleClass(record.key, record.currentValue); });
+  private _applyKeyValueChanges(changes: KeyValueChanges<string, any>): void {
+    changes.forEachAddedItem((record) => this._toggleClass(record.key, record.currentValue));
+    changes.forEachChangedItem((record) => this._toggleClass(record.key, record.currentValue));
     changes.forEachRemovedItem((record) => {
       if (record.previousValue) {
         this._toggleClass(record.key, false);
@@ -147,41 +115,42 @@ export class MDirective implements DoCheck, OnDestroy {
     });
   }
 
-  private _applyIterableChanges(changes: any): void {
-    changes.forEachAddedItem((record) => { this._toggleClass(record.item, true); });
-    changes.forEachRemovedItem((record) => { this._toggleClass(record.item, false); });
+  private _applyIterableChanges(changes: IterableChanges<string>): void {
+    changes.forEachAddedItem((record) => {
+      if (typeof record.item === 'string') {
+        this._toggleClass(record.item, true);
+      } else {
+        throw new Error(
+          `NgClass can only toggle CSS classes expressed as strings, got ${stringify(record.item)}`);
+      }
+    });
+
+    changes.forEachRemovedItem((record) => this._toggleClass(record.item, false));
   }
 
   private _applyInitialClasses(isCleanup: boolean) {
-    this._initialClasses.forEach(className => this._toggleClass(className, !isCleanup));
+    this._initialClasses.forEach(klass => this._toggleClass(klass, !isCleanup));
   }
 
-  private _applyClasses(rawClassVal: string[] | Set<string>| {[key: string]: string},
-                        isCleanup: boolean) {
-    if (isPresent(rawClassVal)) {
-      if (isArray(rawClassVal)) {
-        (<string[]>rawClassVal).forEach(className => this._toggleClass(className, !isCleanup));
-      } else if (rawClassVal instanceof Set) {
-        (<Set<string>>rawClassVal).forEach(className => this._toggleClass(className, !isCleanup));
+  private _applyClasses(rawClassVal: string[] | Set<string> | { [klass: string]: any }, isCleanup: boolean) {
+    if (rawClassVal) {
+      if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+        (<any> rawClassVal).forEach((klass: string) => this._toggleClass(klass, !isCleanup));
       } else {
-        StringMapWrapper.forEach(<{[k: string]: string}>rawClassVal, (expVal, className) => {
-          if (expVal) this._toggleClass(className, !isCleanup);
+        Object.keys(rawClassVal).forEach(klass => {
+          if (rawClassVal[klass] != null) this._toggleClass(klass, !isCleanup);
         });
       }
     }
   }
 
-  private _toggleClass(className: string, enabled): void {
-    className = className.trim();
-    if (className.length > 0) {
-      if (className.indexOf(' ') > -1) {
-        var classes = className.split(/\s+/g);
-        for (var i = 0, len = classes.length; i < len; i++) {
-          this._renderer.setElementClass(this._ngEl.nativeElement, this._getBemClassName(classes[i]), enabled);
-        }
-      } else {
-        this._renderer.setElementClass(this._ngEl.nativeElement, this._getBemClassName(className), enabled);
-      }
+  private _toggleClass(klass: string, enabled: any): void {
+    klass = klass.trim();
+    if (klass) {
+      klass.split(/\s+/g).forEach(
+        klass => {
+          this._renderer.setElementClass(this._ngEl.nativeElement, this._getBemClassName(klass), !!enabled);
+        });
     }
   }
 }

@@ -1,13 +1,10 @@
-import {Injectable, NgZone} from 'angular2/core';
-import {BACKEND} from '../config';
-import {SimpleEvent} from '../libs/simple-event';
-import {ZoneModel} from '../zones/zone.model';
-import {IZoneModelDto} from '../zones/zone.model';
-
-import io = require('socket.io-client');
+import { Injectable, NgZone } from '@angular/core';
+import { BACKEND } from '../config';
+import { SimpleEvent } from '../libs/simple-event';
+import { IZoneModelDto } from '../zones/zone.model';
+import io from 'socket.io-client';
 
 export module Backend {
-
   export enum AcUnitMode {
     AUTO = 0,
     HEAT = 1,
@@ -48,10 +45,9 @@ export class BackendProvider {
   public onData = new SimpleEvent<Backend.BootstrapData>();
   public onZoneChanged = new SimpleEvent<Backend.Zone>();
   public onAcUnitChanged = new SimpleEvent<Backend.AcUnit>();
-  public connected = false;
 
   constructor() {
-    this._linkEvents();
+    this.linkEvents();
   }
 
   get connected() {
@@ -71,7 +67,7 @@ export class BackendProvider {
     this.socket.emit('gui.setZoneEnable', {id, value});
   }
 
-  protected _linkEvents() {
+  protected linkEvents() {
     this.socket.on('data', (resp) => {
       this.onData.trigger(resp);
     });

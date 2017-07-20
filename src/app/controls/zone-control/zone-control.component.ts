@@ -1,13 +1,11 @@
-import {Component, Input, ElementRef} from 'angular2/core';
-import {ZoneModel} from '../../zones/zone.model.ts';
-
-var jQuery: JQueryStatic = require('jquery');
+import { Component, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { ZoneModel } from '../../zones/zone.model';
 
 @Component({
   selector: 'zone-control',
   template: require('./zone-control.tpl.jade')
 })
-export class ZoneControlComponent {
+export class ZoneControlComponent implements AfterViewInit, OnDestroy {
   public expanded = false;
 
   @Input() zone: ZoneModel;
@@ -29,7 +27,7 @@ export class ZoneControlComponent {
   }
 
   toggleSync() {
-    this.zone.sync =  !this.zone.sync;
+    this.zone.sync = !this.zone.sync;
     this.hide();
   }
 
@@ -39,16 +37,17 @@ export class ZoneControlComponent {
   }
 
   ngAfterViewInit() {
-    jQuery(document).on('mouseup', this._clickOutsideHandler.bind(this));
+    document.addEventListener('mouseup', this.clickOutsideHandler.bind(this));
   }
 
   ngOnDestroy() {
-    jQuery(document).off('mouseup', this._clickOutsideHandler.bind(this));
+    document.removeEventListener('mouseup', this.clickOutsideHandler.bind(this));
   }
 
-  private _clickOutsideHandler(e) {
-    const $element = jQuery(this.element.nativeElement);
-    if (!$element.is(e.target) && $element.has(e.target).length === 0) {
+  private clickOutsideHandler(e: MouseEvent) {
+    const element: Element = this.element.nativeElement;
+
+    if (element !== e.target && !element.contains(e.target as Element)) {
       this.hide();
     }
   }

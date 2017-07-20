@@ -1,51 +1,51 @@
-import {Injectable} from 'angular2/core';
-import {ITempControllable} from '../../interfaces.ts';
-import {ZonesStoreProvider} from '../../zones/zones-store.provider';
-import {ZoneModel} from '../../zones/zone.model';
-import {TEMP_STEP} from '../../config';
+import { Injectable } from '@angular/core';
+import { ITempControllable } from '../../interfaces';
+import { ZonesStoreProvider } from '../../zones/zones-store.provider';
+import { ZoneModel } from '../../zones/zone.model';
+import { TEMP_STEP } from '../../config';
 
 const DEFAULT_SETPOINT = 24;
 
 class CommonTemperature implements ITempControllable {
-  protected _setpoint: number;
+  protected setpoint: number;
 
-  constructor(protected _zonesStore: ZonesStoreProvider) {
+  constructor(protected zonesStore: ZonesStoreProvider) {
     const zones = this.zones;
-    this._setpoint = zones.length ?  zones[0].tempSetpoint : DEFAULT_SETPOINT;
-    this._bindEvents();
-  }
-
-  protected _bindEvents() {
-    _.each(this._zonesStore.items, (zone: ZoneModel) => {
-      zone.onSyncChanged.bind(() => {
-        if (zone.sync) {
-          zone.tempSetpoint = this._setpoint;
-        }
-      });
-    });
+    this.setpoint = zones.length ? zones[0].tempSetpoint : DEFAULT_SETPOINT;
+    this.bindEvents();
   }
 
   get zones(): ZoneModel[] {
-    return this._zonesStore.filter((zone) => zone.sync);
+    return this.zonesStore.filter((zone) => zone.sync);
   }
 
   incrementTemp() {
-    this._setpoint = this._setpoint + TEMP_STEP;
+    this.setpoint = this.setpoint + TEMP_STEP;
     this._updateZones();
   }
 
   decrementTemp() {
-    this._setpoint = this._setpoint - TEMP_STEP;
+    this.setpoint = this.setpoint - TEMP_STEP;
     this._updateZones();
   }
 
   get tempSetpoint() {
-    return this._setpoint;
+    return this.setpoint;
   }
 
   protected _updateZones() {
-    _.each(this.zones, (zone: ZoneModel) => {
-      zone.tempSetpoint = this._setpoint;
+    this.zones.forEach((zone: ZoneModel) => {
+      zone.tempSetpoint = this.setpoint;
+    });
+  }
+
+  protected bindEvents() {
+    this.zonesStore.items.forEach((zone: ZoneModel) => {
+      zone.onSyncChanged.bind(() => {
+        if (zone.sync) {
+          zone.tempSetpoint = this.setpoint;
+        }
+      });
     });
   }
 }
@@ -53,9 +53,9 @@ class CommonTemperature implements ITempControllable {
 @Injectable()
 export class TempControlProvider {
   public currentTarget: ITempControllable;
-  protected commonTemp: CommonTemperature;
-  protected _element: Element;
-  protected _isCommonMode;
+  private commonTemp: CommonTemperature;
+  private _element: Element;
+  private _isCommonMode: boolean;
 
   constructor(zonesStore: ZonesStoreProvider) {
     this.commonTemp = new CommonTemperature(zonesStore);

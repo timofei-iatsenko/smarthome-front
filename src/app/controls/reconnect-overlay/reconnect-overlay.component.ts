@@ -1,14 +1,14 @@
-import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {BackendProvider} from '../../common/backend.provider';
+import { Component } from '@angular/core';
+import { BackendProvider } from '../../common/backend.provider';
+import template from './reconnect-overlay.tpl.jade';
 
 @Component({
   selector: 'reconnect-overlay',
-  template: require('./reconnect-overlay.tpl.jade')
+  template
 })
-export class ReconnectOverlayComponent {
 
-  constructor(private backend: BackendProvider) {
-  }
+export class ReconnectOverlayComponent {
+  constructor(private backend: BackendProvider) {}
 
   get visible() {
     return !this.backend.connected;

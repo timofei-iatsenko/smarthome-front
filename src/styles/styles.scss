@@ -1,12 +1,4 @@
-$mainBgColor: #181623;
-$barSize: 65px;
-$defaultSidePadding: 15px;
-$mainActiveColor: #ff3366;
-$topBarColor: #1d1a2a;
-$defaultBtnSize: 40px;
-$mainAccentColor: #94a7f8;
-$mainDarkColor: #0f0e17;
-
+@import "./variables";
 @import "../styles/mixins";
 @import "../styles/fonts";
 @import "../styles/normalize";

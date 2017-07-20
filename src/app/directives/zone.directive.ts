@@ -1,22 +1,19 @@
-import {Directive, Component, ElementRef, Renderer, Input} from 'angular2/core';
-import {ZonesStoreProvider} from '../zones/zones-store.provider.ts';
-import {TempControlProvider} from '../controls/temp-control/temp-control.provider.ts';
+import { Directive, ElementRef, Input, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
+import { ZonesStoreProvider } from '../zones/zones-store.provider';
+import { TempControlProvider } from '../controls/temp-control/temp-control.provider';
 
 const directives: ZoneDirective[] = [];
-/*
- * Directive
- * XLarge is a simple directive to show how one is made
- */
-@Directive({
-  selector: '[zone-id]', // using [ ] means selecting attributes
-  host: {
-    '(click)': 'onClick()',
-  }
-})
-export class ZoneDirective {
-  @Input('zone-id') zoneId: number;
 
-  constructor(private zones: ZonesStoreProvider, private element: ElementRef, private tempControl: TempControlProvider) {
+@Directive({
+  selector: '[zone-id]',
+})
+
+export class ZoneDirective implements AfterViewInit, OnDestroy {
+  @Input('zone-id') zoneId: string;
+
+  constructor(private zones: ZonesStoreProvider,
+              private element: ElementRef,
+              private tempControl: TempControlProvider) {
     directives.push(this);
   }
 
@@ -24,12 +21,12 @@ export class ZoneDirective {
     return this.zoneModel.selected;
   }
 
-  set selected(value: boolean){
+  set selected(value: boolean) {
     this.zoneModel.selected = value;
   }
 
   get zoneModel() {
-    return this.zones.getById(this.zoneId);
+    return this.zones.getById(+this.zoneId);
   }
 
   select() {
@@ -48,8 +45,9 @@ export class ZoneDirective {
     this.selected ? this.clear() : this.select();
   }
 
-  onClick() {
-    _.each(directives,  (instance) => {
+  @HostListener('click')
+  handleClick() {
+    directives.forEach((instance) => {
       if (instance !== this) {
         instance.clear();
       }
@@ -59,20 +57,23 @@ export class ZoneDirective {
   }
 
   ngAfterViewInit() {
-    jQuery(document).on('mouseup', this._clickOutsideHandler.bind(this));
+    document.addEventListener('mouseup', this.clickOutsideHandler.bind(this));
   }
 
   ngOnDestroy() {
-    jQuery(document).off('mouseup', this._clickOutsideHandler.bind(this));
+    document.removeEventListener('mouseup', this.clickOutsideHandler.bind(this));
   }
 
-  private _clickOutsideHandler(e) {
-    if (this.selected) {
-      const $tempControl = jQuery(this.tempControl.nativeElement);
-      const $element = jQuery(this.element.nativeElement);
-      if (!$element.is(e.target) && $element.has(e.target).length === 0 && $tempControl.has(e.target).length == 0) {
-        this.clear();
-      }
+  private clickOutsideHandler(e: MouseEvent) {
+    if (!this.selected) {
+      return;
+    }
+
+    const element: Element = this.element.nativeElement;
+    const tempControl: Element = this.tempControl.nativeElement;
+
+    if (element !== e.target && !element.contains(e.target as Element) && !tempControl.contains(e.target as Element)) {
+      this.clear();
     }
   }
 }

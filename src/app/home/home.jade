@@ -19,7 +19,7 @@ settings-panel([hidden]="!settingsExpanded")
 +b.floor-plan
   include /misc/plan.svg
 
-  zone-control(*ngFor="#zone of zones", [zone] = 'zone')
+  zone-control(*ngFor="let zone of zones", [zone] = 'zone')
 
 +b.schedule-progress
 

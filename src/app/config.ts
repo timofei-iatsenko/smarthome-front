@@ -1,14 +1,14 @@
-import {ZoneConfig} from './zones/index';
-import {Settings} from './interfaces';
-import {SettingsExhaustFanAdapter} from './settings/adapters/settings-exhaust-fan-adapter';
-import {SettingsIntakeFanAdapter} from './settings/adapters/settings-intake-fan-adapter';
+import { ZoneConfig } from './zones/index';
+import { Settings } from './interfaces';
+import { SettingsExhaustFanAdapter } from './settings/adapters/settings-exhaust-fan-adapter';
+import { SettingsIntakeFanAdapter } from './settings/adapters/settings-intake-fan-adapter';
 
 export const BACKEND = {
-  host: process.env.ENV == 'production' ? undefined : 'http://192.168.1.50',
+  host: process.env.ENV === 'production' ? undefined : 'http://tima23.asuscomm.com:3000/',
 };
 
-export const TEMP_STEP: number  = 0.5;
-export const ZONES : ZoneConfig[] = [
+export const TEMP_STEP: number = 0.5;
+export const ZONES: ZoneConfig[] = [
   {
     position: {
       left: '6%',
@@ -35,7 +35,7 @@ export const ZONES : ZoneConfig[] = [
   },
 ];
 
-export const SETTINGS_FEATURES  : Settings.IFeatureConfig[] = [
+export const SETTINGS_FEATURES: Settings.IFeatureConfig[] = [
   {
     key: 'acMode',
     inStatusBar: true,

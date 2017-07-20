@@ -1,11 +1,10 @@
-import {Component, Input, ElementRef} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
-import {TempControlProvider} from './temp-control.provider';
-
+import { Component, ElementRef } from '@angular/core';
+import { TempControlProvider } from './temp-control.provider';
+import template from './temp-control.tpl.jade';
 
 @Component({
   selector: 'temp-control',
-  template: require('./temp-control.tpl.jade')
+  template
 })
 
 export class TempControlComponent {
@@ -14,7 +13,7 @@ export class TempControlComponent {
     service.nativeElement = element.nativeElement;
   }
 
-  get isZoned(){
+  get isZoned() {
     return !this.service.isCommonMode();
   }
 

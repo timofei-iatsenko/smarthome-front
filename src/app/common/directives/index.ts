@@ -1,3 +1,9 @@
-export {WavesDirective} from './waves.directive.ts';
-export {MDirective} from './m.directive.ts';
-export {XLinkDirective} from './xlink.directive.ts';
+import { WavesDirective } from './waves.directive';
+import { MDirective } from './m.directive';
+import { XLinkDirective } from './xlink.directive';
+
+export const COMMON_DIRECTIVES = [
+  WavesDirective,
+  MDirective,
+  XLinkDirective
+];

@@ -1,5 +1,4 @@
-import {Directive, Component, ElementRef, Renderer, Input, OnChanges} from 'angular2/core';
-import {SimpleChange} from 'angular2/core';
+import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[xlink]',
@@ -7,12 +6,9 @@ import {SimpleChange} from 'angular2/core';
 export class XLinkDirective implements OnChanges {
   @Input('xlink') link: string;
 
-  constructor(private element: ElementRef) {
-
-  }
+  constructor(private element: ElementRef) {}
 
   ngOnChanges(changes) {
-    jQuery(this.element.nativeElement).attr('xlink:href', changes.link.currentValue);
+    this.element.nativeElement.setAttribute('xlink:href', changes.link.currentValue);
   }
-
 }

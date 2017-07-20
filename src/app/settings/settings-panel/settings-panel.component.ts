@@ -1,21 +1,15 @@
-import {Component, Input, ElementRef} from 'angular2/core';
-import {WavesDirective} from '../../common/directives/waves.directive';
-import {SettingsProvider} from '../settings.provider.ts';
-import {XLinkDirective} from '../../common/directives/xlink.directive.ts';
-import {Settings} from '../../interfaces';
-import {SettingsBaseFeatureModel, SettingsOptionsFeatureModel} from '../settings-feature.model';
-import {SettingsToggleFeatureModel} from '../settings-feature.model';
+import { Component } from '@angular/core';
+import { SettingsProvider } from '../settings.provider';
+import { Settings } from '../../interfaces';
+import { SettingsOptionsFeatureModel } from '../settings-feature.model';
+import { SettingsToggleFeatureModel } from '../settings-feature.model';
 
 @Component({
   selector: 'settings-panel',
-  directives: [
-    WavesDirective,
-    XLinkDirective
-  ],
   template: require('./settings-panel.tpl.jade')
 })
-export class SettingsPanelComponent {
 
+export class SettingsPanelComponent {
   selectedFeature: SettingsOptionsFeatureModel;
 
   constructor(private settings: SettingsProvider) {}
@@ -25,9 +19,8 @@ export class SettingsPanelComponent {
   }
 
   toggleOptions(feature: SettingsOptionsFeatureModel) {
-
     // if the same feature, collapse bar (clear options)
-    this.selectedFeature = this.selectedFeature == feature ? null : feature;
+    this.selectedFeature = this.selectedFeature === feature ? null : feature;
     this.settings.onChange.trigger();
   }
 

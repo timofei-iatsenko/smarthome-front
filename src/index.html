@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
 <head>
-
-  <title>{%= o.webpackConfig.metadata.title %}</title>
-
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{%= o.webpackConfig.metadata.title %}">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
-  <meta name="theme-color" content="#1d1a2a">
-
-  <!-- Remove Tap Highlight on Windows Phone IE -->
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
   <meta name="msapplication-tap-highlight" content="no"/>
-
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
   <!-- base url -->
-  <base href="{%= o.webpackConfig.metadata.baseUrl %}">
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+  <% if (webpackConfig.htmlElements.headTags) { %>
+  <!-- Configured Head Tags  -->
+  <%= webpackConfig.htmlElements.headTags %>
+  <% } %>
 
-  {% for (var css in o.htmlWebpackPlugin.files.css) { %}
-  <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
-  {% } %}
+
+  <%= htmlWebpackPlugin.files.webpackManifest %>
+
+  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+  <% } %>
+
+  <!-- Async Google Analytics: change UA-71073175-1 to be your site's ID -->
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-71073175-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+  <!-- End Google Analytics -->
+
+  <!-- CSS will be injected by webpack here -->
+  <!-- Preload link tags will be injected by webpack here -->
+
 </head>
+
 <body>
 
   <app>
     Loading...
   </app>
 
-  {% if (o.webpackConfig.metadata.ENV === 'development') { %}
-  <!-- Webpack Dev Server reload -->
-  <script src="http://{%= o.webpackConfig.metadata.host %}:{%= o.webpackConfig.metadata.port %}/webpack-dev-server.js"></script>
-  {% } %}
-
-  {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
-  <script src="{%= o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
-  {% } %}
-
+  <!-- Scripts will be injected by webpack here -->
 </body>
 </html>
