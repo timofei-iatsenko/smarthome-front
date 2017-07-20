@@ -42,10 +42,9 @@ export class AppComponent implements OnInit {
       const model = new ZoneModel(zoneConfig);
       this.zonesStore.add(model);
 
-      SimpleEvent.some(model.onSetpointChanged, model.onSyncChanged, model.onEnabledChanged)
-        .bind(debounce(() => {
-          this.backend.changeZone(model.id, model.getDto());
-        }, 300));
+      model.onChanged.bind(debounce(() => {
+        this.backend.changeZone(model.id, model.getDto());
+      }, 300));
     });
   }
 

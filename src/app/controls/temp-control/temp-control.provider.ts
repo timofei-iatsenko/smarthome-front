@@ -41,7 +41,7 @@ class CommonTemperature implements ITempControllable {
 
   protected bindEvents() {
     this.zonesStore.items.forEach((zone: ZoneModel) => {
-      zone.onSyncChanged.bind(() => {
+      zone.onChanged.bind(() => {
         if (zone.sync) {
           zone.tempSetpoint = this.setpoint;
         }

@@ -19,9 +19,7 @@ export class ZoneModel implements ITempControllable {
   public id: number;
   public title: string;
 
-  public onSetpointChanged = new SimpleEvent();
-  public onEnabledChanged = new SimpleEvent();
-  public onSyncChanged = new SimpleEvent();
+  public onChanged = new SimpleEvent();
 
   private _tempSetpoint: number;
 
@@ -40,8 +38,10 @@ export class ZoneModel implements ITempControllable {
   }
 
   set sync(value) {
-    this._sync = value;
-    this.onSyncChanged.trigger();
+    if (this._sync !== value) {
+      this._sync = value;
+      this.onChanged.trigger();
+    }
   }
 
   get tempSetpoint() {
@@ -49,8 +49,10 @@ export class ZoneModel implements ITempControllable {
   }
 
   set tempSetpoint(value) {
-    this._tempSetpoint = value;
-    this.onSetpointChanged.trigger();
+    if (value !==  this._tempSetpoint) {
+      this._tempSetpoint = value;
+      this.onChanged.trigger();
+    }
   }
 
   public setBackendData(zoneData: Backend.Zone) {
@@ -72,12 +74,12 @@ export class ZoneModel implements ITempControllable {
 
   public enable() {
     this.enabled = true;
-    this.onEnabledChanged.trigger();
+    this.onChanged.trigger();
   }
 
   public disable() {
     this.enabled = false;
-    this.onEnabledChanged.trigger();
+    this.onChanged.trigger();
   }
 
   public toggleEnabled() {

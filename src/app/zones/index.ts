@@ -6,7 +6,7 @@ export interface ControlPosition {
 }
 
 export interface ZoneConfig {
-  position: ControlPosition,
-  id: number,
-  title: string,
+  position: ControlPosition;
+  id: number;
+  title: string;
 }
