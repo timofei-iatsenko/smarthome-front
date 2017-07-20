@@ -9,5 +9,5 @@ include /tpl-components/common-components
 
   +e.options-row(*ngIf="selectedFeature")
     +e.option(*ngFor="let option of selectedFeature.getOptions()")
-      +button()([ngClass] = '{active: option.selected}', (click) = 'selectOption(option)')
+      +button()([ngClass] = '{active: option === selectedFeature.getSelectedOption()}', (click) = 'selectOption(option)')
         +icon('{{option.icon}}')

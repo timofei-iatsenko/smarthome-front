@@ -2,6 +2,8 @@ import { ZoneConfig } from './zones/index';
 import { Settings } from './interfaces';
 import { SettingsExhaustFanAdapter } from './settings/adapters/settings-exhaust-fan-adapter';
 import { SettingsIntakeFanAdapter } from './settings/adapters/settings-intake-fan-adapter';
+import { SettingsAcModeAdapter } from './settings/adapters/settings-ac-mode-adpater';
+import { Backend } from './common/backend.provider';
 
 export const BACKEND = {
   host: process.env.ENV === 'production' ? undefined : 'http://tima23.asuscomm.com:3000/',
@@ -40,22 +42,21 @@ export const SETTINGS_FEATURES: Settings.IFeatureConfig[] = [
     key: 'acMode',
     inStatusBar: true,
     type: Settings.IFeatureType.options,
-    adapter: '',
+    adapter: SettingsAcModeAdapter,
     options: [
       {
         icon: 'snowflake',
-        key: 'cool',
+        value: Backend.AcUnitMode.COOL,
         name: 'Охлаждение',
-        selected: true,
       },
       {
         icon: 'sun',
-        key: 'heat',
+        value: Backend.AcUnitMode.HEAT,
         name: 'Обогрев'
       },
       {
         icon: 'water-drop',
-        key: 'dry',
+        value: Backend.AcUnitMode.DRY,
         name: 'Осушение'
       },
     ],

@@ -83,11 +83,10 @@ export class SettingsOptionsFeatureModel extends SettingsBaseFeatureModel {
   }
 
   protected getSelectedOption(): Settings.IFeatureOption {
-    return this.options.find((o) => o.selected);
+    return this.options.find((o) => o.value === this.adapter.getValue());
   }
 
-  toggle() {
-  }
+  toggle() {}
 
   getTitle() {
     return this.getSelectedOption().name;
@@ -106,11 +105,7 @@ export class SettingsOptionsFeatureModel extends SettingsBaseFeatureModel {
   }
 
   setSelectedOption(option: Settings.IFeatureOption) {
-    this.options.forEach((o: Settings.IFeatureOption) => {
-      o.selected = false;
-    });
-
-    option.selected = true;
+    this.adapter.setValue(option.value);
   }
 
   getOptions(): Settings.IFeatureOption[] {

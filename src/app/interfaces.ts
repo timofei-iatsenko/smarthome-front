@@ -20,7 +20,7 @@ export module Settings {
 
   export interface IFeatureOption {
     icon: string;
-    key: string;
+    value: any;
     name: string;
     selected?: boolean;
   }
