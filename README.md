@@ -1,14 +1,32 @@
-# SmarthomeFront
+# Climate Control Mobile Web App
+
+> IoT Angular Project based on Angular 5
+
+This project is home ClimateControl mobile web app, it is client side for [Smarthome](https://github.com/thekip/smarthome) project 
+
+![image](https://cloud.githubusercontent.com/assets/1586852/18437841/6e0e5a2a-7907-11e6-87b8-30445acaf658.png)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
+
+## Quick start
+**Make sure you have Node version >= 6.7 and NPM >= 5**
+
+```bash
+# clone repo
+git clone https://github.com/thekip/smarthome-front
+
+# change directory to repo
+cd smarthome-front
+
+# install the repo with npm
+npm install
+
+# start the server
+npm start
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 

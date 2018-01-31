@@ -1,6 +1,18 @@
 {
   "name": "smarthome-front",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "Climate Control Mobile Web App",
+  "keywords": [
+    "iot",
+    "smarthome",
+    "angular",
+    "webpack",
+    "typescript",
+    "websockets",
+    "mobile"
+  ],
+  "author": "Timofey Yatcenko <mask04@list.ru>",
+  "homepage": "https://github.com/thekip/smarthome-front",
   "license": "MIT",
   "scripts": {
     "start": "ng serve",
@@ -13,7 +25,6 @@
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
     "@angular/core": "^5.2.0",
-    "@angular/forms": "^5.2.0",
     "@angular/http": "^5.2.0",
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
