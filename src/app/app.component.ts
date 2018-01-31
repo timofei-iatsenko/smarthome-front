@@ -10,7 +10,7 @@ import { ZONES } from './config';
 import { ZoneModel } from './zones/zone.model';
 import { ZonesStoreProvider } from './zones/zones-store.provider';
 
-import debounce from 'lodash/debounce';
+import * as debounce from 'lodash/debounce';
 
 import '../styles.scss';
 

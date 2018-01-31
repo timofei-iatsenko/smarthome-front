@@ -1,5 +1,5 @@
-import { Directive, Component, ElementRef, Renderer } from '@angular/core';
-import Waves from 'node-waves';
+import { Directive, ElementRef } from '@angular/core';
+import * as Waves from 'node-waves';
 
 let inited = false;
 

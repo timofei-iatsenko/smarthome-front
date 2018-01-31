@@ -5,7 +5,7 @@
          class="feature">
       <button type="button" waves="waves" [class.active]="feature.isActive()">
         <svg>
-          <use [attrs.xlink:href]="'#' + feature.getIcon()"></use>
+          <use [attr.xlink:href]="'#' + feature.getIcon()"></use>
         </svg>
       </button><span class="feature-title">{{ feature.getTitle() }}</span>
     </div>
@@ -17,7 +17,7 @@
               [class.active]="option === selectedFeature.getSelectedOption()"
               (click)="selectOption(option)">
         <svg>
-          <use [attrs.xlink:href]="'#' + option.icon"></use>
+          <use [attr.xlink:href]="'#' + option.icon"></use>
         </svg>
       </button>
     </div>
