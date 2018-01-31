@@ -9,7 +9,7 @@
   z-index: 10;
 
   &__features-row, &__options-row {
-    @extend %top-bar;
+    @include top-bar;
     background-color: rgba($topBarColor, 0.9);
     justify-content: space-around;
   }

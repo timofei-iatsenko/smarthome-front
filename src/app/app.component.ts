@@ -9,11 +9,10 @@ import { AcUnitProvider } from './common/ac-unit.provider';
 import { ZONES } from './config';
 import { ZoneModel } from './zones/zone.model';
 import { ZonesStoreProvider } from './zones/zones-store.provider';
-import { SimpleEvent } from './libs/simple-event';
 
 import debounce from 'lodash/debounce';
 
-import '../styles/styles.scss';
+import '../styles.scss';
 
 @Component({
   selector: 'app',

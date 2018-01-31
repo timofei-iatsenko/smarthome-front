@@ -1,7 +1,7 @@
-import { Injectable, NgZone } from '@angular/core';
-import { BACKEND } from '../config';
-import { SimpleEvent } from '../libs/simple-event';
-import { IZoneModelDto } from '../zones/zone.model';
+import {Injectable} from '@angular/core';
+import {BACKEND} from '../config';
+import {SimpleEvent} from '../libs/simple-event';
+import {IZoneModelDto} from '../zones/zone.model';
 import io from 'socket.io-client';
 
 export module Backend {
@@ -39,7 +39,6 @@ export module Backend {
 
 @Injectable()
 export class BackendProvider {
-
   public socket: SocketIOClient.Socket = io.connect(BACKEND.host);
   public onData = new SimpleEvent<Backend.BootstrapData>();
   public onZoneChanged = new SimpleEvent<Backend.Zone>();

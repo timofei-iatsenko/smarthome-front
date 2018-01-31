@@ -1,0 +1,22 @@
+@import "styles/variables";
+@import "styles/mixins";
+@import "styles/fonts";
+@import "styles/normalize";
+@import "styles/buttons";
+@import "styles/waves";
+
+svg {
+  fill: currentColor
+}
+
+a {
+  &:hover {
+    color: $mainActiveColor;
+  }
+}
+
+body {
+  @extend %font-open-sans;
+  background-color: $mainBgColor;
+  color: #fff;
+}

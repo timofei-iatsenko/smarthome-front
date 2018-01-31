@@ -1,3 +1,5 @@
+@import 'variables';
+
 @mixin makeCircle($r) {
   height: $r;
   width: $r;
@@ -13,4 +15,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin top-bar() {
+  background-color: #1d1a2a;
+  padding: 0 $defaultSidePadding;
+  align-items: center;
+  display: flex;
 }

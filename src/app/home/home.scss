@@ -29,15 +29,8 @@
   }
 }
 
-%top-bar {
-  background-color: #1d1a2a;
-  padding: 0 $defaultSidePadding;
-  align-items: center;
-  display: flex;
-}
-
 .control-bar {
-  @extend %top-bar;
+  @include top-bar;
   height: $barSize;
   justify-content: space-between;
 

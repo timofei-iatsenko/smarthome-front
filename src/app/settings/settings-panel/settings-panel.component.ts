@@ -7,7 +7,7 @@ import { SettingsToggleFeatureModel } from '../settings-feature.model';
 @Component({
   selector: 'settings-panel',
   templateUrl: './settings-panel.html',
-  styleUrls: ['./'],
+  styleUrls: ['./settings-panel.scss'],
 })
 
 export class SettingsPanelComponent {

@@ -4,7 +4,7 @@ import { TempControlProvider } from './temp-control.provider';
 @Component({
   selector: 'temp-control',
   templateUrl: 'temp-control.html',
-  styleUrls: ['te'],
+  styleUrls: ['temp-control.scss'],
 })
 
 export class TempControlComponent {

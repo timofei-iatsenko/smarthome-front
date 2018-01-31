@@ -1,4 +1,4 @@
-import { ZoneConfig } from './zones/index';
+import { ZoneConfig } from './zones';
 import { Settings } from './interfaces';
 import { SettingsExhaustFanAdapter } from './settings/adapters/settings-exhaust-fan-adapter';
 import { SettingsIntakeFanAdapter } from './settings/adapters/settings-intake-fan-adapter';
@@ -6,7 +6,8 @@ import { SettingsAcModeAdapter } from './settings/adapters/settings-ac-mode-adpa
 import { Backend } from './common/backend.provider';
 
 export const BACKEND = {
-  host: process.env.ENV === 'production' ? undefined : 'http://tima23.asuscomm.com:3000/',
+  // host: process.env.ENV === 'production' ? undefined : 'http://tima23.asuscomm.com:3000/',
+  host: undefined,
 };
 
 export const TEMP_STEP: number = 0.5;
