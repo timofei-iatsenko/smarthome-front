@@ -7,49 +7,48 @@
   position: absolute;
   width: 100%;
   z-index: 10;
+}
 
-  &__features-row, &__options-row {
-    @include top-bar;
-    background-color: rgba($topBarColor, 0.9);
-    justify-content: space-around;
+.features-row, .options-row {
+  @include top-bar;
+  background-color: rgba($topBarColor, 0.9);
+  justify-content: space-around;
+}
+
+.features-row {
+  height: 80px;
+  padding-bottom: 5px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75px;
+
+  button {
+    @extend %waves-circle;
+    @extend %waves-light;
+    @include makeCircle($defaultBtnSize);
+    @include alignCenter();
   }
+}
 
-  &__features-row {
-    height: 80px;
-    padding-bottom: 5px;
+.feature-title {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.options-row {
+  border-top: 1px solid #292635;
+  height: 55px;
+
+  button {
+    @extend %waves-circle;
+    @extend %waves-light;
+
+    @include makeCircle($defaultBtnSize);
+    @include alignCenter();
   }
-
-  &__feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 75px;
-
-    button {
-      @extend %waves-circle;
-      @extend %waves-light;
-      @include makeCircle($defaultBtnSize);
-      @include alignCenter();
-    }
-  }
-
-  &__feature-title {
-    display: block;
-    margin-top: 5px;
-    font-size: 12px;
-  }
-
-  &__options-row {
-    border-top: 1px solid #292635;
-    height: 55px;
-
-    button {
-      @extend %waves-circle;
-      @extend %waves-light;
-
-      @include makeCircle($defaultBtnSize);
-      @include alignCenter();
-    }
-  }
-
 }
