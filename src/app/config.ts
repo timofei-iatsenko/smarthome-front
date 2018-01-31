@@ -6,8 +6,7 @@ import { SettingsIntakeFanAdapter } from './settings/adapters/settings-intake-fa
 import { SettingsAcModeAdapter } from './settings/adapters/settings-ac-mode-adpater';
 
 export const BACKEND = {
-  // host: process.env.ENV === 'production' ? undefined : 'http://tima23.asuscomm.com:3000/',
-  host: undefined,
+  host: process.env.ENV === 'production' ? undefined : 'http://192.168.1.50',
 };
 
 export const TEMP_STEP = 0.5;

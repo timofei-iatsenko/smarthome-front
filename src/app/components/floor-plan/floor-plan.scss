@@ -1,0 +1,19 @@
+$normalColor: #2b2c43;
+$selectedColor: #80ee6e;
+
+.walls {
+  fill: $normalColor;
+}
+
+.zone {
+  .trigger {
+    opacity: 0;
+  }
+
+  &.selected {
+    .walls {
+      fill: $selectedColor;
+    }
+  }
+}
+

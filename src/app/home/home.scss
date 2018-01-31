@@ -42,24 +42,8 @@
 }
 
 .floor-plan {
-  $normalColor: #2b2c43;
-  $selectedColor: #80ee6e;
   padding: 30px 15px;
   position: relative;
-
-  .walls {
-    fill: #2b2c43;
-  }
-
-  .zone {
-    .trigger {
-      opacity: 0;
-    }
-
-    &.selected {
-      .walls {
-        fill: $selectedColor;
-      }
-    }
-  }
 }
+
+

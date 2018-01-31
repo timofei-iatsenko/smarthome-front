@@ -21,6 +21,7 @@
 <settings-panel [hidden]="!settingsExpanded"></settings-panel>
 
 <div class="floor-plan">
+  <floor-plan></floor-plan>
   <!--include /misc/plan.svg-->
   <zone-control *ngFor="let zone of zones" [zone]="zone"></zone-control>
 </div>

@@ -1,7 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { FloorPlanComponent } from './components/floor-plan/floor-plan.component';
 
-import {HomeComponent} from './home/home';
+import {HomeComponent} from './home/home.component';
 import {ZoneControlComponent} from './controls/zone-control/zone-control.component';
 import {TempControlComponent} from './controls/temp-control/temp-control.component';
 import {ReconnectOverlayComponent} from './controls/reconnect-overlay/reconnect-overlay.component';
@@ -25,6 +26,7 @@ import {COMMON_DIRECTIVES} from './common/directives';
     AppComponent,
     HomeComponent,
 
+    FloorPlanComponent,
     ZoneDirective,
     ZoneControlComponent,
     TempControlComponent,
@@ -40,8 +42,5 @@ import {COMMON_DIRECTIVES} from './common/directives';
   imports: [
     BrowserModule,
   ],
-  /**
-   * Expose our Services and Providers into Angular's dependency injection.
-   */
 })
 export class AppModule {}
