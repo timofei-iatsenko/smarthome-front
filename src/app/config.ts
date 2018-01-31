@@ -1,17 +1,17 @@
-import { ZoneConfig } from './zones';
+import { AcUnitMode } from './common/backend/ac-unit';
+import { RoomConfig } from './zones';
 import { Settings } from './interfaces';
 import { SettingsExhaustFanAdapter } from './settings/adapters/settings-exhaust-fan-adapter';
 import { SettingsIntakeFanAdapter } from './settings/adapters/settings-intake-fan-adapter';
 import { SettingsAcModeAdapter } from './settings/adapters/settings-ac-mode-adpater';
-import { Backend } from './common/backend.provider';
 
 export const BACKEND = {
   // host: process.env.ENV === 'production' ? undefined : 'http://tima23.asuscomm.com:3000/',
   host: undefined,
 };
 
-export const TEMP_STEP: number = 0.5;
-export const ZONES: ZoneConfig[] = [
+export const TEMP_STEP = 0.5;
+export const ZONES: RoomConfig[] = [
   {
     position: {
       left: '6%',
@@ -47,17 +47,17 @@ export const SETTINGS_FEATURES: Settings.IFeatureConfig[] = [
     options: [
       {
         icon: 'snowflake',
-        value: Backend.AcUnitMode.COOL,
+        value: AcUnitMode.COOL,
         name: 'Охлаждение',
       },
       {
         icon: 'sun',
-        value: Backend.AcUnitMode.HEAT,
+        value: AcUnitMode.HEAT,
         name: 'Обогрев'
       },
       {
         icon: 'water-drop',
-        value: Backend.AcUnitMode.DRY,
+        value: AcUnitMode.DRY,
         name: 'Осушение'
       },
     ],

@@ -1,11 +1,14 @@
 import { ISettingsAdapter } from './settings-adapter.interface';
-import { BackendProvider } from '../../common/backend.provider';
-import { SettingsProvider } from '../settings.provider';
+import { BackendService } from '../../common/backend/backend.service';
+import { SettingsService } from '../settings.service';
 
 export class SettingsIntakeFanAdapter implements ISettingsAdapter {
   private enabled = false;
 
-  constructor(private backend: BackendProvider, private settings: SettingsProvider) {
+  constructor(
+    private backend: BackendService,
+    private settings: SettingsService,
+  ) {
     backend.onData.bind((data) => {
       this.enabled = data.intakeFanEnabled;
       settings.onChange.trigger();

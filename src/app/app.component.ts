@@ -4,7 +4,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { BackendProvider } from './common/backend.provider';
+import { BackendService } from './common/backend/backend.service';
 import { AcUnitProvider } from './common/ac-unit.provider';
 import { ZONES } from './config';
 import { ZoneModel } from './zones/zone.model';
@@ -18,7 +18,7 @@ import '../styles.scss';
   selector: 'app',
   providers: [
     ZonesStoreProvider,
-    BackendProvider,
+    BackendService,
     AcUnitProvider,
   ],
   encapsulation: ViewEncapsulation.None,
@@ -27,7 +27,7 @@ import '../styles.scss';
 export class AppComponent implements OnInit {
 
   constructor(private acUnit: AcUnitProvider,
-              private backend: BackendProvider,
+              private backend: BackendService,
               private zonesStore: ZonesStoreProvider) {
   }
 

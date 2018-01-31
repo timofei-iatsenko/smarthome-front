@@ -1,11 +1,15 @@
+import { AcUnitMode } from '../../common/backend/ac-unit';
 import { ISettingsAdapter } from './settings-adapter.interface';
-import { Backend, BackendProvider } from '../../common/backend.provider';
-import { SettingsProvider } from '../settings.provider';
+import { BackendService } from '../../common/backend/backend.service';
+import { SettingsService } from '../settings.service';
 
 export class SettingsAcModeAdapter implements ISettingsAdapter {
-  private mode = Backend.AcUnitMode.COOL;
+  private mode = AcUnitMode.COOL;
 
-  constructor(private backend: BackendProvider, private settings: SettingsProvider) {
+  constructor(
+    private backend: BackendService,
+    private settings: SettingsService
+  ) {
    this.init();
   }
 
@@ -22,6 +26,6 @@ export class SettingsAcModeAdapter implements ISettingsAdapter {
   }
 
   getValue(): number {
-    return this.mode || Backend.AcUnitMode.COOL;
+    return this.mode || AcUnitMode.COOL;
   }
 }

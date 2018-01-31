@@ -5,7 +5,7 @@ export interface ControlPosition {
   bottom?: string;
 }
 
-export interface ZoneConfig {
+export interface RoomConfig {
   position: ControlPosition;
   id: number;
   title: string;

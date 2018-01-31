@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BackendProvider } from '../../common/backend.provider';
+import { BackendService } from '../../common/backend/backend.service';
 
 @Component({
   selector: 'reconnect-overlay',
@@ -8,7 +8,7 @@ import { BackendProvider } from '../../common/backend.provider';
 })
 
 export class ReconnectOverlayComponent {
-  constructor(private backend: BackendProvider) {}
+  constructor(private backend: BackendService) {}
 
   get visible() {
     return !this.backend.connected;

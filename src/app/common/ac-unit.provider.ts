@@ -1,4 +1,4 @@
-import { Backend } from './backend.provider';
+import { AcUnit, AcUnitMode } from './backend/ac-unit';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -7,9 +7,9 @@ export class AcUnitProvider {
   enabled: boolean;
   fanSpeed: number;
   tempSetpoint: number;
-  unitMode: Backend.AcUnitMode;
+  unitMode: AcUnitMode;
 
-  setData(data: Backend.AcUnit) {
+  setData(data: AcUnit) {
     Object.assign(this, data);
   }
 }

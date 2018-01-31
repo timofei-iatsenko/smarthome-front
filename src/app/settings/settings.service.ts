@@ -7,18 +7,18 @@ import {
   SettingsBaseFeatureModel
 } from './settings-feature.model';
 import { SimpleEvent } from '../libs/simple-event';
-import { BackendProvider } from '../common/backend.provider';
+import { BackendService } from '../common/backend/backend.service';
 
 @Injectable()
-export class SettingsProvider {
+export class SettingsService {
   onChange = new SimpleEvent();
   features: SettingsBaseFeatureModel[];
 
-  constructor(private backend: BackendProvider) {
+  constructor(private backend: BackendService) {
     this.features = this.featuresFactory(SETTINGS_FEATURES);
   }
 
-  featuresFactory(configs: Settings.IFeatureConfig[]): SettingsBaseFeatureModel[] {
+  private featuresFactory(configs: Settings.IFeatureConfig[]): SettingsBaseFeatureModel[] {
     return configs.map((c) => {
       if (c.type === Settings.IFeatureType.toggle) {
         return new SettingsToggleFeatureModel(c, this.backend, this);

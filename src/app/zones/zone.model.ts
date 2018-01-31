@@ -1,8 +1,8 @@
-import { ControlPosition, ZoneConfig } from './index';
+import { Room } from '../common/backend/room';
+import { ControlPosition, RoomConfig } from './index';
 import { ITempControllable } from '../interfaces';
 import { SimpleEvent } from '../libs/simple-event';
 import { TEMP_STEP } from '../config';
-import { Backend } from '../common/backend.provider';
 
 export interface IZoneModelDto {
   enabled: boolean;
@@ -23,7 +23,7 @@ export class ZoneModel implements ITempControllable {
 
   private _tempSetpoint: number;
 
-  constructor(config: ZoneConfig) {
+  constructor(config: RoomConfig) {
     this.controlPosition = config.position;
     this.id = config.id;
     this.title = config.title;
@@ -55,7 +55,7 @@ export class ZoneModel implements ITempControllable {
     }
   }
 
-  public setBackendData(zoneData: Backend.Zone) {
+  public setBackendData(zoneData: Room) {
     this.ambientTemp = zoneData.ambientTemp;
     this._tempSetpoint = zoneData.tempSetpoint;
     this.enabled = zoneData.enabled;

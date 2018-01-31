@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Settings } from '../interfaces';
-import { BackendProvider } from '../common/backend.provider';
-import { SettingsProvider } from './settings.provider';
+import { BackendService } from '../common/backend/backend.service';
+import { SettingsService } from './settings.service';
 
 @Injectable()
 export abstract class SettingsBaseFeatureModel {
@@ -10,8 +10,8 @@ export abstract class SettingsBaseFeatureModel {
   adapter: Settings.IAdapter;
 
   constructor(config: Settings.IFeatureConfig,
-              protected backend: BackendProvider,
-              protected settings: SettingsProvider) {
+              protected backend: BackendService,
+              protected settings: SettingsService) {
     this._key = config.key;
     this.inStatusBar = config.inStatusBar;
 
@@ -35,8 +35,8 @@ export class SettingsToggleFeatureModel extends SettingsBaseFeatureModel {
   private enabled: boolean;
 
   constructor(config: Settings.IFeatureConfig,
-              protected backend: BackendProvider,
-              protected settings: SettingsProvider) {
+              protected backend: BackendService,
+              protected settings: SettingsService) {
     super(config, backend, settings);
 
     this.icon = config.icon;
@@ -76,8 +76,8 @@ export class SettingsOptionsFeatureModel extends SettingsBaseFeatureModel {
   protected options: Settings.IFeatureOption[];
 
   constructor(config: Settings.IFeatureConfig,
-              protected backend: BackendProvider,
-              protected settings: SettingsProvider) {
+              protected backend: BackendService,
+              protected settings: SettingsService) {
     super(config, backend, settings);
     this.options = config.options;
   }

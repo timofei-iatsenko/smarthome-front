@@ -32,7 +32,6 @@
       true,
       140
     ],
-    "member-access": false,
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -128,5 +127,12 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true
-  }
+  },
+  "trailing-comma": [
+    true,
+    {
+      "multiline": "always",
+      "singleline": "never"
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SettingsProvider } from '../settings.provider';
+import { SettingsService } from '../settings.service';
 import { Settings } from '../../interfaces';
 import { SettingsOptionsFeatureModel } from '../settings-feature.model';
 import { SettingsToggleFeatureModel } from '../settings-feature.model';
@@ -13,7 +13,7 @@ import { SettingsToggleFeatureModel } from '../settings-feature.model';
 export class SettingsPanelComponent {
   selectedFeature: SettingsOptionsFeatureModel;
 
-  constructor(private settings: SettingsProvider) {}
+  constructor(private settings: SettingsService) {}
 
   get features() {
     return this.settings.features;

@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { TempControlProvider } from '../controls/temp-control/temp-control.provider';
 import { ZoneModel } from '../zones/zone.model';
 
-import { SettingsProvider } from '../settings/settings.provider';
+import { SettingsService } from '../settings/settings.service';
 import { ZonesStoreProvider } from '../zones/zones-store.provider';
 
 @Component({
   selector: 'home',
   providers: [
     TempControlProvider,
-    SettingsProvider
+    SettingsService
   ],
   templateUrl: './home.html',
   styleUrls: ['home.scss'],

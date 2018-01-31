@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SettingsProvider } from '../../settings/settings.provider';
+import { SettingsService } from '../../settings/settings.service';
 import { SettingsBaseFeatureModel } from '../../settings/settings-feature.model';
 import { AcUnitProvider } from '../../common/ac-unit.provider';
 
@@ -10,11 +10,13 @@ import { AcUnitProvider } from '../../common/ac-unit.provider';
 })
 
 export class StatusAreaComponent implements OnInit, OnDestroy {
-
   public items;
-  protected removeWatcherFn;
+  private removeWatcherFn;
 
-  constructor(private settings: SettingsProvider, private acUnit: AcUnitProvider) {}
+  constructor(
+    private settings: SettingsService,
+    private acUnit: AcUnitProvider,
+  ) {}
 
   ngOnInit() {
     this.items = this.fetchItems();
