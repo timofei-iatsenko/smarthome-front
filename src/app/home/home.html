@@ -1,12 +1,11 @@
 <div class="header">
   <div class="btns">
-    <button (click)="toggleSettings()"
-            [ngClass]="{active: settingsExpanded}"
-            class="btn waves-circle waves-light">
-      <svg>
-        <use xlink:href="#cogwheel"></use>
-      </svg>
-    </button>
+    <icon-button
+      icon="cogwheel"
+      (click)="toggleSettings()"
+      [active]="settingsExpanded"
+      class="btn"
+    ></icon-button>
     <!--utton.btn.waves-circle.waves-light-->
     <!--  +icon('clock-history')-->
   </div>
@@ -27,4 +26,4 @@
 </div>
 
 <div class="schedule-progress"></div>
-<!--<reconnect-overlay></reconnect-overlay>-->
+<reconnect-overlay></reconnect-overlay>

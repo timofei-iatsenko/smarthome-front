@@ -1,5 +1,6 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
+@import '../../styles/waves-mixins';
 
 .header {
   padding: 0 $defaultSidePadding 0;
@@ -10,22 +11,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
-  &__btns {
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-  }
+.btns {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
 
-  &__btn {
-    @include makeCircle($defaultBtnSize);
-    @include alignCenter();
+.btn {
+  margin-right: 10px;
 
-    margin-right: 10px;
-
-    &:last-child {
-      margin-right: 0;
-    }
+  &:last-child {
+    margin-right: 0;
   }
 }
 

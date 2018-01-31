@@ -1,6 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { FloorPlanComponent } from './components/floor-plan/floor-plan.component';
+import { ButtonComponent } from './components/icon-button/icon-button.component';
 
 import {HomeComponent} from './home/home.component';
 import {ZoneControlComponent} from './controls/zone-control/zone-control.component';
@@ -9,6 +11,7 @@ import {ReconnectOverlayComponent} from './controls/reconnect-overlay/reconnect-
 import {ZoneDirective} from './directives/zone.directive';
 import {SettingsPanelComponent} from './settings/settings-panel/settings-panel.component';
 import {StatusAreaComponent} from './controls/status-area/status-area.component';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 // App is our top level component
 import {AppComponent} from './app.component';
@@ -33,7 +36,7 @@ import {COMMON_DIRECTIVES} from './common/directives';
     SettingsPanelComponent,
     StatusAreaComponent,
     ReconnectOverlayComponent,
-
+    ButtonComponent,
     COMMON_DIRECTIVES
   ],
   /**
@@ -41,6 +44,8 @@ import {COMMON_DIRECTIVES} from './common/directives';
    */
   imports: [
     BrowserModule,
+    HttpClientModule,
+    InlineSVGModule,
   ],
 })
 export class AppModule {}

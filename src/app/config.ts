@@ -1,3 +1,4 @@
+import { environment } from '../environments/environment';
 import { AcUnitMode } from './common/backend/ac-unit';
 import { RoomConfig } from './zones';
 import { Settings } from './interfaces';
@@ -6,7 +7,7 @@ import { SettingsIntakeFanAdapter } from './settings/adapters/settings-intake-fa
 import { SettingsAcModeAdapter } from './settings/adapters/settings-ac-mode-adpater';
 
 export const BACKEND = {
-  host: process.env.ENV === 'production' ? undefined : 'http://192.168.1.50',
+  host: environment.production ? undefined : 'http://192.168.1.50',
 };
 
 export const TEMP_STEP = 0.5;

@@ -7,36 +7,30 @@
     <span [hidden]="!zone.enabled">&#8594; {{zone.tempSetpoint}}&deg;</span>
   </div>
 
-  <div [hidden]="!zone.sync" class="sync">
-    <svg>
-      <use xlink:href="#sync"></use>
-    </svg>
+  <div [hidden]="!zone.sync" class="sync"
+       [inlineSVG]="'/assets/icon/sync.svg'">
   </div>
 
   <div class="btns">
     <button type="button" waves="waves"
             [class.active]="zone.enabled"
             (click)="toggleEnabled()"
-            class="btn left">
-      <svg>
-        <use xlink:href="#power2"></use>
-      </svg>
+            class="btn left"
+            [inlineSVG]="'/assets/icon/power2.svg'"
+    >
     </button>
     <button type="button" waves="waves"
             [class.active]="expanded"
             (click)="toggle()"
-            class="btn toggle">
-      <svg>
-        <use xlink:href="#more"></use>
-      </svg>
+            class="btn toggle"
+            [inlineSVG]="'/assets/icon/more.svg'"
+    >
     </button>
     <button type="button" waves="waves"
             [class.active]="zone.sync"
             (click)="toggleSync()"
-            class="btn right">
-      <svg>
-        <use xlink:href="#sync"></use>
-      </svg>
+            class="btn right"
+            [inlineSVG]="'/assets/icon/sync.svg'">
     </button>
   </div>
 </div>

@@ -37,7 +37,8 @@ $tempLineMargin: 10px;
   font-weight: bold;
   height: 15px;
   transition: opacity 0.2s ease-out;
-  svg {
+
+  ::ng-deepsvg {
     @include size(15px);
   }
 
@@ -70,6 +71,8 @@ $tempLineMargin: 10px;
   display: flex;
   position: absolute;
 
+  color: #fff;
+
   &.right {
     right: 0;
   }
@@ -88,7 +91,7 @@ $tempLineMargin: 10px;
     margin-left: -$btnSize / 2;
   }
 
-  svg {
+  ::ng-deep svg {
     @include size($btnSize / 2);
   }
 

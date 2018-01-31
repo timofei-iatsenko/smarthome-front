@@ -1,33 +1,31 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
+$itemSize: 15px;
 .status-area {
-  $itemSize: 15px;
-
   display: flex;
-
   justify-content: space-between;
   align-items: center;
+}
 
-  &__item {
-    color: rgba(255,255,255,0.3);
-    height: $itemSize;
-    margin-right: 10px;
-    font-size: 11px;
-    line-height: 8px;
-    display: flex;
-    align-items: flex-start;
+.item {
+  color: rgba(255,255,255,0.3);
+  height: $itemSize;
+  margin-right: 10px;
+  font-size: 11px;
+  line-height: 8px;
+  display: flex;
+  align-items: flex-start;
 
-    svg {
-      @include size($itemSize);
-    }
+  ::ng-deep svg {
+    @include size($itemSize);
+  }
 
-    &--active {
-      color: rgba($mainActiveColor, 0.5);
-    }
+  &.active {
+    color: rgba($mainActiveColor, 0.5);
+  }
 
-    &:last-child {
-      margin-right: 0;
-    }
+  &:last-child {
+    margin-right: 0;
   }
 }

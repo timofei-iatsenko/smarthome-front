@@ -1,6 +1,5 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
-@import "../../../styles/waves-mixins";
 
 .temp-control {
   $height: 50px;
@@ -27,29 +26,24 @@
     line-height: $height;
   }
 
-  .increase, .decrease {
+  .increase ::ng-deep button, .decrease ::ng-deep button {
     @include makeCircle($btnSize);
-    @extend %waves-circle;
     position: absolute;
     z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
     top: $btnGap;
 
-    svg {
+    ::ng-deep svg {
       height: 10.5px;
     }
   }
 
-  .increase {
-    @extend %waves-light;
+  .increase ::ng-deep button {
     color: $mainAccentColor;
     right: $btnGap;
   }
 
-  .decrease {
-    @extend %waves-light;
+  .decrease ::ng-deep button {
     color: #fff;
     left: $btnGap;
   }

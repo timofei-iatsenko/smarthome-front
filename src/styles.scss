@@ -2,7 +2,7 @@
 @import "styles/mixins";
 @import "styles/fonts";
 @import "styles/normalize";
-@import "styles/buttons";
+//@import "styles/buttons";
 @import "styles/waves";
 
 svg {
@@ -19,4 +19,17 @@ body {
   @extend %font-open-sans;
   background-color: $mainBgColor;
   color: #fff;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  &:focus {
+    outline: none !important;
+  }
 }

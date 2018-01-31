@@ -1,0 +1,23 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+button {
+  color: #fff;
+
+  @include makeCircle($defaultBtnSize);
+  @include alignCenter();
+
+  ::ng-deep svg {
+    @include size(25px)
+  }
+
+  &.active {
+    color: $mainActiveColor;
+  }
+
+  span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+}

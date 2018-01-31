@@ -1,25 +1,22 @@
 <div class="settings-panel">
   <div class="features-row">
     <div *ngFor="let feature of features"
-         (click)="feature.hasOptions() ? toggleOptions(feature) : toggleFeature(feature)"
          class="feature">
-      <button type="button" waves="waves" [class.active]="feature.isActive()">
-        <svg>
-          <use [attr.xlink:href]="'#' + feature.getIcon()"></use>
-        </svg>
-      </button><span class="feature-title">{{ feature.getTitle() }}</span>
+      <icon-button
+        (click)="feature.hasOptions() ? toggleOptions(feature) : toggleFeature(feature)"
+        [icon]="feature.getIcon()"
+        [active]="feature.isActive()">
+      </icon-button>
+      <span class="feature-title">{{ feature.getTitle() }}</span>
     </div>
   </div>
   <div *ngIf="selectedFeature" class="options-row">
     <div *ngFor="let option of selectedFeature.getOptions()" class="option">
-      <button type="button"
-              waves="waves"
-              [class.active]="option === selectedFeature.getSelectedOption()"
-              (click)="selectOption(option)">
-        <svg>
-          <use [attr.xlink:href]="'#' + option.icon"></use>
-        </svg>
-      </button>
+      <icon-button
+        (click)="selectOption(option)"
+        [icon]="option.icon"
+        [active]="option === selectedFeature.getSelectedOption()">
+      </icon-button>
     </div>
   </div>
 </div>

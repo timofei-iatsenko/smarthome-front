@@ -1,13 +1,10 @@
 <div class="status-area">
-  <div class="item" [m]="{active: acEnabled}">
-    <svg>
-      <use xlink:href="#power2"></use>
-    </svg>
+  <div class="item"
+       [class.active]="acEnabled"
+       [inlineSVG]="'/assets/icon/power2.svg'">
   </div>
-  <div class="item" *ngFor="let item of items">
-    <svg>
-      <use [attr.xlink:href]="'#' + item.getIcon()"></use>
-    </svg>
+  <div class="item" *ngFor="let item of items"
+       [inlineSVG]="'/assets/icon/'+ item.getIcon() +'.svg'">
   </div>
   <!--.item-->
   <!--  +icon('thermometer')-->
