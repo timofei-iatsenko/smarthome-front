@@ -3,7 +3,8 @@ import { ZoneModel } from '../../zones/zone.model';
 
 @Component({
   selector: 'zone-control',
-  template: require('./zone-control.tpl.jade')
+  templateUrl: './zone-control.html',
+  styleUrls: ['./zone-control.scss'],
 })
 export class ZoneControlComponent implements AfterViewInit, OnDestroy {
   public expanded = false;

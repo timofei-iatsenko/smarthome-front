@@ -1,0 +1,13 @@
+<div class="temp-control" [class.isZoned]="isZoned">
+  <button class="decrease" type="button" waves="waves" (click)="decrease()">
+    <svg>
+      <use xlink:href="#minus"></use>
+    </svg>
+  </button>
+  <div class="value">{{ value }}&deg;</div>
+  <button class="increase" type="button" waves="waves" (click)="increase()">
+    <svg>
+      <use xlink:href="#plus"></use>
+    </svg>
+  </button>
+</div>

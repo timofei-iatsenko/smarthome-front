@@ -1,3 +1,7 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "../../../styles/waves-mixins";
+
 .temp-control {
   $height: 50px;
   $btnGap: 3px;
@@ -17,13 +21,13 @@
     background-color: rgba(128, 238, 110, 0.08);
   }
 
-  &__value {
+  .value {
     position: absolute;
     left: $height + $btnGap;
     line-height: $height;
   }
 
-  &__increase, &__decrease {
+  .increase, .decrease {
     @include makeCircle($btnSize);
     @extend %waves-circle;
     position: absolute;
@@ -38,13 +42,13 @@
     }
   }
 
-  &__increase {
+  .increase {
     @extend %waves-light;
     color: $mainAccentColor;
     right: $btnGap;
   }
 
-  &__decrease {
+  .decrease {
     @extend %waves-light;
     color: #fff;
     left: $btnGap;

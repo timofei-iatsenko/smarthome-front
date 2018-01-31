@@ -1,0 +1,15 @@
+<div class="status-area">
+  <div class="item" [m]="{active: acEnabled}">
+    <svg>
+      <use xlink:href="#power2"></use>
+    </svg>
+  </div>
+  <div class="item" *ngFor="let item of items">
+    <svg>
+      <use [attr.xlink:href]="'#' + item.getIcon()"></use>
+    </svg>
+  </div>
+  <!--.item-->
+  <!--  +icon('thermometer')-->
+  <!--  span 2&deg;-->
+</div>

@@ -6,7 +6,8 @@ import { SettingsToggleFeatureModel } from '../settings-feature.model';
 
 @Component({
   selector: 'settings-panel',
-  template: require('./settings-panel.tpl.jade')
+  templateUrl: './settings-panel.html',
+  styleUrls: ['./'],
 })
 
 export class SettingsPanelComponent {

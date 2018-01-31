@@ -1,9 +1,0 @@
-include /tpl-components/common-components
-
-+b.temp-control([ngClass]='{"temp-control--zoned": isZoned}')
-  +button.decrease((click)="decrease()")
-    +icon('minus')
-  +e.value
-    | {{ value }}&deg;
-  +button.increase((click)="increase()")
-    +icon('plus')

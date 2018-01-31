@@ -1,0 +1,18 @@
+%waves-dark {
+  .waves-ripple {
+    background: rgba(0,0,0,0.2);
+    background: radial-gradient(rgba(0,0,0,0.2) 0,rgba(0,0,0,.3) 40%,rgba(0,0,0,.4) 50%,rgba(0,0,0,.5) 60%,rgba(255,255,255,0) 70%);
+  }
+}
+
+%waves-light {
+  .waves-ripple {
+    background: rgba(255,255,255,0.4);
+    background: radial-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,.3) 40%,rgba(255,255,255,.4) 50%,rgba(255,255,255,.5) 60%,rgba(255,255,255,0) 70%);
+  }
+}
+
+%waves-circle {
+  transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+}

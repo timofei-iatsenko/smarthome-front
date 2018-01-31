@@ -1,0 +1,42 @@
+<div [class.isExpanded]="expanded"
+     [class.isEnabled]="zone.enabled"
+     [ngStyle]="zone.controlPosition"
+     class="zone-control">
+  <div class="temp">
+    <span>{{zone.ambientTemp}}&deg;</span>
+    <span [hidden]="!zone.enabled">&#8594; {{zone.tempSetpoint}}&deg;</span>
+  </div>
+
+  <div [hidden]="!zone.sync" class="sync">
+    <svg>
+      <use xlink:href="#sync"></use>
+    </svg>
+  </div>
+
+  <div class="btns">
+    <button type="button" waves="waves"
+            [ngClass]="{'zone-control__btn--active': zone.enabled}"
+            (click)="toggleEnabled()"
+            class="btn left">
+      <svg>
+        <use xlink:href="#power2"></use>
+      </svg>
+    </button>
+    <button type="button" waves="waves"
+            [ngClass]="{'zone-control__btn--active': expanded}"
+            (click)="toggle()"
+            class="btn toggle">
+      <svg>
+        <use xlink:href="#more"></use>
+      </svg>
+    </button>
+    <button type="button" waves="waves"
+            [ngClass]="{'zone-control__btn--active': zone.sync}"
+            (click)="toggleSync()"
+            class="btn right">
+      <svg>
+        <use xlink:href="#sync"></use>
+      </svg>
+    </button>
+  </div>
+</div>

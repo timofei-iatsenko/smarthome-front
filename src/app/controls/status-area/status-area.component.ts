@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SettingsProvider } from '../../settings/settings.provider';
 import { SettingsBaseFeatureModel } from '../../settings/settings-feature.model';
 import { AcUnitProvider } from '../../common/ac-unit.provider';
-import template from './status-area.tpl.jade';
 
 @Component({
   selector: 'status-area',
-  template
+  templateUrl: 'status-area.html',
+  styleUrls: ['status-area.scss'],
 })
 
 export class StatusAreaComponent implements OnInit, OnDestroy {

@@ -6,15 +6,14 @@ import { ZoneModel } from '../zones/zone.model';
 import { SettingsProvider } from '../settings/settings.provider';
 import { ZonesStoreProvider } from '../zones/zones-store.provider';
 
-import template from './home.jade';
-
 @Component({
   selector: 'home',
   providers: [
     TempControlProvider,
     SettingsProvider
   ],
-  template
+  templateUrl: './home.html',
+  styleUrls: ['home.scss'],
 })
 export class HomeComponent implements OnInit {
   settingsExpanded = false;

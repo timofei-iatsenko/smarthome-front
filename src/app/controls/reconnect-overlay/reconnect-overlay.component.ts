@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { BackendProvider } from '../../common/backend.provider';
-import template from './reconnect-overlay.tpl.jade';
 
 @Component({
   selector: 'reconnect-overlay',
-  template
+  templateUrl: 'reconnect-overlay.html',
+  styleUrls: ['reconnect-overlay.scss']
 })
 
 export class ReconnectOverlayComponent {

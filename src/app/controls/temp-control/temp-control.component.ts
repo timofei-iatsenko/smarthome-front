@@ -1,10 +1,10 @@
 import { Component, ElementRef } from '@angular/core';
 import { TempControlProvider } from './temp-control.provider';
-import template from './temp-control.tpl.jade';
 
 @Component({
   selector: 'temp-control',
-  template
+  templateUrl: 'temp-control.html',
+  styleUrls: ['te'],
 })
 
 export class TempControlComponent {

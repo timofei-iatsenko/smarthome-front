@@ -1,0 +1,72 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.header {
+  padding: 0 $defaultSidePadding 0;
+  box-sizing: border-box;
+  color: #fff;
+  height: $barSize;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__btns {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__btn {
+    @include makeCircle($defaultBtnSize);
+    @include alignCenter();
+
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+%top-bar {
+  background-color: #1d1a2a;
+  padding: 0 $defaultSidePadding;
+  align-items: center;
+  display: flex;
+}
+
+.control-bar {
+  @extend %top-bar;
+  height: $barSize;
+  justify-content: space-between;
+
+  &__content {
+    font-size: 17.5px;
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.floor-plan {
+  $normalColor: #2b2c43;
+  $selectedColor: #80ee6e;
+  padding: 30px 15px;
+  position: relative;
+
+  .walls {
+    fill: #2b2c43;
+  }
+
+  .zone {
+    .trigger {
+      opacity: 0;
+    }
+
+    &.selected {
+      .walls {
+        fill: $selectedColor;
+      }
+    }
+  }
+}

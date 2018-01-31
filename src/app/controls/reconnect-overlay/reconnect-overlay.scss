@@ -1,3 +1,5 @@
+@import "./spinner";
+
 .reconnect-overlay {
   padding: 20vh 0 0 0;
   height: 100vh;
@@ -8,16 +10,16 @@
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 99;
   text-align: center;
+}
 
-  &__message-head {
-    font-size: 40px;
-  }
+.message-head {
+  font-size: 40px;
+}
 
-  &__message-body {
-    font-size: 30px;
-  }
+.message-body {
+  font-size: 30px;
+}
 
-  .spinner {
-    margin-top: 80px;
-  }
+.spinner {
+  margin-top: 80px;
 }
