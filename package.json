@@ -15,7 +15,7 @@
   "homepage": "https://github.com/thekip/smarthome-front",
   "license": "MIT",
   "scripts": {
-    "start": "ng serve",
+    "start": "ng serve --aot",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint"
