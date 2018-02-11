@@ -2,8 +2,8 @@
 @import "styles/mixins";
 @import "styles/fonts";
 @import "styles/normalize";
-//@import "styles/buttons";
 @import "styles/waves";
+
 
 svg {
   fill: currentColor
@@ -15,10 +15,19 @@ a {
   }
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   @extend %font-open-sans;
   background-color: $mainBgColor;
   color: #fff;
+}
+
+app {
+  position: fixed;
+  width: 100%;
 }
 
 button {

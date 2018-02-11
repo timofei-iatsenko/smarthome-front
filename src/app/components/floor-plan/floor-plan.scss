@@ -1,6 +1,11 @@
 $normalColor: #2b2c43;
 $selectedColor: #80ee6e;
 
+svg {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 .walls {
   fill: $normalColor;
 }
